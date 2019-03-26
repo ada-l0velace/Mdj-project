@@ -9,6 +9,7 @@ public class script : MonoBehaviour
     public GameObject tower;
     public GameObject enemy;
     private int count = 0;
+    private GameObject prev;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,12 +19,21 @@ public class script : MonoBehaviour
     void clicked()
     {
         GameObject e = (GameObject) Instantiate(tower);
-        e.transform.position = new Vector3(Random.Range(-1, 1) * 500, 1, Random.Range(-1, 1) * 500);
+        if (prev == null) {
+            e.transform.SetParent(gameObject.transform);
+            e.transform.localPosition = new Vector3(Random.Range(-3, 3), 2, Random.Range(-3, 3));
+        }
+        else {
+            e.transform.SetParent(gameObject.transform);
+            e.transform.localPosition = new Vector3(Random.Range(-3, 3), 2, Random.Range(-3, 3));
+            
+        }
         count++;
         Debug.Log("Count: " + count);
     }
 
     // Update is called once per frame
     void Update() {
+        
     }
 }
