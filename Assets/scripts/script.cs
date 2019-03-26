@@ -20,7 +20,7 @@ public class script : MonoBehaviour
     {
         GameObject e = (GameObject) Instantiate(tower);
         e.transform.SetParent(gameObject.transform);
-        e.transform.localPosition = new Vector3(Random.Range(-3, 3), 1, Random.Range(-3, 3));
+        e.transform.localPosition = new Vector3(Random.Range(-4, 4), 1, Random.Range(-4, 4));
     
         count++;
         Debug.Log("Count: " + count);
