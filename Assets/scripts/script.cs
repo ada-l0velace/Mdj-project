@@ -39,7 +39,10 @@ public class script : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if(Physics.Raycast(ray, out hit, Mathf.Infinity) && currTower) {
-                currTower.transform.position = hit.point;
+                currentPos.x = hit.point.x;
+                currentPos.y = transform.position.y;
+                currentPos.z = hit.point.z;
+                currTower.transform.position = currentPos;
                 //Debug.DrawRay(hit);
                 //Debug.Log(hit.transform.position);
                 currTower = null;
@@ -51,6 +54,7 @@ public class script : MonoBehaviour
 
             if(Physics.Raycast(ray, out hit, Mathf.Infinity) && currTower) {
                 currentPos.x = hit.point.x;
+                currentPos.y = transform.position.y;
                 currentPos.z = hit.point.z;
                 currTower.transform.position = currentPos;
                 //Debug.DrawRay(hit);
