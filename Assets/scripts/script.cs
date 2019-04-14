@@ -25,6 +25,7 @@ public class script : MonoBehaviour
         
         GameObject e = (GameObject) Instantiate(tower);
         currTower = e;
+        currentPos.y = transform.position.y;
         //e.transform.SetParent(gameObject.transform);
         //e.transform.localPosition = new Vector3(Input.mousePosition.x, 1, Input.mousePosition.z);
         /*
@@ -52,11 +53,13 @@ public class script : MonoBehaviour
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if(Physics.Raycast(ray, out hit, Mathf.Infinity) && currTower) {
-                currentPos.x = hit.point.x;
-                currentPos.y = transform.position.y;
-                currentPos.z = hit.point.z;
-                currTower.transform.position = currentPos;
+            if(Physics.Raycast(ray, out hit) && currTower) {
+                if (hit.collider.tag == gameObject.GetComponent<Collider>().tag) {
+                    currentPos.x = hit.point.x;
+                    currentPos.z = hit.point.z;
+                    Debug.Log(currentPos.y);
+                    currTower.transform.position = hit.point;
+                }
                 //Debug.DrawRay(hit);
                 //Debug.Log(hit.transform.position);
             }

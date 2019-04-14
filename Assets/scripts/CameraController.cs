@@ -5,7 +5,7 @@ public class CameraController : MonoBehaviour {
     public float panBorderThickness = 10f;
     public Vector2 panLimit;
     public float scrollSpeed = 20f;
-    public float minY = 20f;
+    public float minY = 10f;
     public float maxY = 120f;
     // Update is called once per frame
     void Update() {
