@@ -9,10 +9,7 @@ public class script : MonoBehaviour
     public Button button;
     public GameObject tower;
     private GameObject currTower;
-    public GameObject enemy;
-    private int count = 0;
     private Vector3 currentPos;
-    private GameObject prev;
     // Start is called before the first frame update
     void Start() {
         currentPos = new Vector3(0,0,0);
@@ -40,7 +37,7 @@ public class script : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if(Physics.Raycast(ray, out hit, Mathf.Infinity) && currTower) {
-                if (hit.collider.tag == gameObject.GetComponent<Collider>().tag) {
+                if (hit.collider.tag == "PlacebleObject") {
                     currTower.transform.position = hit.point;
                 }   
                 //Debug.DrawRay(hit);
@@ -53,7 +50,7 @@ public class script : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if(Physics.Raycast(ray, out hit) && currTower) {
-                if (hit.collider.tag == gameObject.GetComponent<Collider>().tag) {
+                if (hit.collider.tag == "PlacebleObject") {
                     currTower.transform.position = hit.point;
                 }
                 //Debug.DrawRay(hit);
