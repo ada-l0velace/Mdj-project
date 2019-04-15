@@ -80,16 +80,13 @@ public class World : MonoBehaviour {
             for (int i = 0; i < 8; i++) {
                 BuildChunkAt(i, 0, j, ItemTexture.Stone, ItemTexture.Stone);
                 buildAtIndex(i, j);
-            }
-            for (int i = 0; i < 8; i++) {
+
                 BuildChunkAt(-i, 0, -j, ItemTexture.Stone, ItemTexture.Stone);
                 buildAtIndex(-i, -j);
-            }
-            for (int i = 0; i < 8; i++) {
+
                 BuildChunkAt(i, 0, -j, ItemTexture.Stone, ItemTexture.Stone);
                 buildAtIndex(i, -j);
-            }
-            for (int i = 0; i < 8; i++) {
+
                 BuildChunkAt(-i, 0, j, ItemTexture.Stone, ItemTexture.Stone);
                 buildAtIndex(-i, j);
             }
