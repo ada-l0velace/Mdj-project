@@ -16,8 +16,11 @@ public class World : MonoBehaviour {
     public Vector3[,,] allVertices = new Vector3[chunkSize + 1, chunkSize + 1, chunkSize + 1];
     public static ConcurrentDictionary<string, Chunk> chunks;
     public Chunk c;
+    public Transform startPosition;
+    public Transform endPosition;
+
     int[,] map = new int[,]  {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                                {1,0,1,0,0,0,0,0,0,0,0,1,1,0,1,1},
+                                {1,2,1,0,0,0,0,0,0,0,0,1,1,0,1,1},
                                 {1,0,1,0,1,1,1,1,1,1,0,1,1,0,1,1},
                                 {1,0,1,0,0,0,0,0,1,1,0,1,1,0,1,1},
                                 {1,0,1,1,1,1,1,0,1,1,0,1,1,0,1,1},
@@ -43,25 +46,27 @@ public class World : MonoBehaviour {
         //Debug.Log (totalChunks);
     }
 
-    void BuildChunkAt(int x, int y, int z) {
+    Chunk BuildChunkAt(int x, int y, int z) {
         Vector3 chunkPostion = new Vector3(x * chunkSize, y * chunkSize, z * chunkSize);
 
         string n = BuildChunkName(chunkPostion);
         c = new Chunk(chunkPostion, textureAtlas);
         c.chunk.transform.parent = this.transform;
         chunks.TryAdd(c.chunk.name, c);
+        return c;
     }
 
-    void BuildChunkAt(int x, int y, int z, ItemTexture top, ItemTexture bot) {
+    Chunk BuildChunkAt(int x, int y, int z, ItemTexture top, ItemTexture bot) {
         Vector3 chunkPostion = new Vector3(x * chunkSize, y * chunkSize, z * chunkSize);
         string n = BuildChunkName(chunkPostion);
         c = new Chunk(chunkPostion, top, bot ,textureAtlas);
         c.chunk.transform.parent = this.transform;
         chunks.TryAdd(c.chunk.name, c);
+        return c;
     }
 
     void buildAtIndex(int i, int j) {
-        if (map[7 + i, 7 + j] == 0)
+        if (map[7 + i, 7 + j] != 1)
             BuildChunkAt(i, 1, j);
         else
             BuildChunkAt(i, 1, j, ItemTexture.Grass, ItemTexture.Dirt);
@@ -70,8 +75,19 @@ public class World : MonoBehaviour {
     void buildAtIndex(int i, int k, int j) {
         if (map[7 + i, 7 + j] == 1)
             BuildChunkAt(i, k, j);
-        else
+        else if (map[7 + i, 7 + j] == 2) {
+            //BuildChunkAt(i, k, j);
+            startPosition.transform.position = new Vector3(BuildChunkAt(i, k, j, ItemTexture.Stone, ItemTexture.Stone).chunk.transform.position.x,World.chunkSize, c.chunk.transform.position.z);
+        }
+
+        else if (map[7 + i, 7 + j] == 3) {
             BuildChunkAt(i, k, j, ItemTexture.Stone, ItemTexture.Stone);
+        }
+
+        else {
+            BuildChunkAt(i, k, j, ItemTexture.Stone, ItemTexture.Stone);
+
+        }
     }
 
     // Use this for initialization

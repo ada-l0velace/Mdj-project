@@ -39,7 +39,11 @@ public class script : MonoBehaviour
 
             if(Physics.Raycast(ray, out hit, Mathf.Infinity) && currTower) {
                 if (hit.collider.tag == "PlacebleObject") {
-                    currTower.transform.position = hit.point;
+                    float x = Mathf.Floor(hit.point.x / 1.0f) * 1;
+                    float y = Mathf.Floor(hit.point.y / 1.0f) * 1;
+                    float z = Mathf.Floor(hit.point.z / 1.0f) * 1;
+                    Vector3 n = new Vector3(x, y, z);
+                    currTower.transform.position = n;
                 }   
                 //Debug.DrawRay(hit);
                 //Debug.Log(hit.transform.position);
@@ -56,7 +60,11 @@ public class script : MonoBehaviour
 
             if(Physics.Raycast(ray, out hit) && currTower) {
                 if (hit.collider.tag == "PlacebleObject") {
-                    currTower.transform.position = hit.point;
+                    float x = Mathf.Floor(hit.point.x/1.0f) * 1;
+                    float y = Mathf.Floor(hit.point.y / 1.0f) * 1;
+                    float z = Mathf.Floor(hit.point.z / 1.0f) * 1;
+                    Vector3 n = new Vector3(x, y, z);
+                    currTower.transform.position = n;
                 }
                 //Debug.DrawRay(hit);
                 //Debug.Log(hit.transform.position);

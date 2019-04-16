@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlacebleObject
+  - Enemy
+  - Tower
   layers:
   - Default
   - TransparentFX

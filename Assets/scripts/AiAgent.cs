@@ -13,6 +13,9 @@ public class AiAgent : MonoBehaviour {
         moving = false;
         destination = new Vector3(-21f, 4f, 26f);
         gameObject.AddComponent<SelectableUnitComponent>();
+        gameObject.AddComponent<Enemy>();
+        //gameObject.AddComponent<LookAtTarget>();
+        //gameObject.AddComponent<Rigidbody>();
 
     }
 
@@ -22,8 +25,8 @@ public class AiAgent : MonoBehaviour {
             m_Agent.destination =destination;
             moving = true;
         }
-        
-        if (Vector3.Distance(transform.position, destination) <= 0.2f) {
+        //Debug.Log(Vector3.Distance(transform.position, destination));
+        if (Vector3.Distance(transform.position, destination) <= 1.2f) {
             DestroyImmediate(gameObject);
         }
     }
