@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEditor;
@@ -12,6 +11,7 @@ public class World : MonoBehaviour {
     public static int chunkSize = 4;
     public static int radius = 6;
     public Material textureAtlas;
+    public NavMeshSurface meshSurface;
     public enum NDIR { UP, DOWN, LEFT, RIGHT, FRONT, BACK }
     public Vector3[,,] allVertices = new Vector3[chunkSize + 1, chunkSize + 1, chunkSize + 1];
     public static ConcurrentDictionary<string, Chunk> chunks;
@@ -67,6 +67,13 @@ public class World : MonoBehaviour {
             BuildChunkAt(i, 1, j, ItemTexture.Grass, ItemTexture.Dirt);
     }
 
+    void buildAtIndex(int i, int k, int j) {
+        if (map[7 + i, 7 + j] == 1)
+            BuildChunkAt(i, k, j);
+        else
+            BuildChunkAt(i, k, j, ItemTexture.Stone, ItemTexture.Stone);
+    }
+
     // Use this for initialization
     void Start() {
         //generate all vertices
@@ -78,16 +85,21 @@ public class World : MonoBehaviour {
         chunks = new ConcurrentDictionary<string, Chunk>();
         for (int j = 0; j < 8; j++) {
             for (int i = 0; i < 8; i++) {
-                BuildChunkAt(i, 0, j, ItemTexture.Stone, ItemTexture.Stone);
+
+                //BuildChunkAt(i, 0, j, ItemTexture.Stone, ItemTexture.Stone);
+                buildAtIndex(i, 0, j);
                 buildAtIndex(i, j);
 
-                BuildChunkAt(-i, 0, -j, ItemTexture.Stone, ItemTexture.Stone);
+                //BuildChunkAt(-i, 0, -j, ItemTexture.Stone, ItemTexture.Stone);
+                buildAtIndex(-i, 0, -j);
                 buildAtIndex(-i, -j);
 
-                BuildChunkAt(i, 0, -j, ItemTexture.Stone, ItemTexture.Stone);
+                //BuildChunkAt(i, 0, -j, ItemTexture.Stone, ItemTexture.Stone);
+                buildAtIndex(i, 0, -j);
                 buildAtIndex(i, -j);
 
-                BuildChunkAt(-i, 0, j, ItemTexture.Stone, ItemTexture.Stone);
+                //BuildChunkAt(-i, 0, j, ItemTexture.Stone, ItemTexture.Stone);
+                buildAtIndex(-i, 0, j);
                 buildAtIndex(-i, j);
             }
         }
@@ -97,6 +109,10 @@ public class World : MonoBehaviour {
                 c.Value.DrawChunk();
             }
         }
+        meshSurface = this.gameObject.AddComponent<NavMeshSurface>();
+        meshSurface.layerMask = 1;
+        //StaticEditorFlags.OffMeshLinkGeneration = true;
+        meshSurface.BuildNavMesh();
 
     }
 

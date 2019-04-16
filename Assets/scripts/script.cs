@@ -21,6 +21,7 @@ public class script : MonoBehaviour
         buildTower = true;
         
         GameObject e = (GameObject) Instantiate(tower);
+        e.AddComponent<SelectableUnitComponent>();
         currTower = e;
         currentPos.y = transform.position.y;
         //e.transform.SetParent(gameObject.transform);
@@ -42,7 +43,11 @@ public class script : MonoBehaviour
                 }   
                 //Debug.DrawRay(hit);
                 //Debug.Log(hit.transform.position);
+
                 currTower = null;
+                if (Input.GetKey("left shift")) {
+                    clicked();
+                }
             }
         }
         else if (currTower != null) {
