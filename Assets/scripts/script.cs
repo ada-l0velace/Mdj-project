@@ -10,6 +10,7 @@ public class script : MonoBehaviour
     public GameObject tower;
     private GameObject currTower;
     private Vector3 currentPos;
+    private float gridSize = 1.0f;
     // Start is called before the first frame update
     void Start() {
         currentPos = new Vector3(0,0,0);
@@ -39,9 +40,9 @@ public class script : MonoBehaviour
 
             if(Physics.Raycast(ray, out hit, Mathf.Infinity) && currTower) {
                 if (hit.collider.tag == "PlacebleObject") {
-                    float x = Mathf.Floor(hit.point.x / 1.0f) * 1;
-                    float y = Mathf.Floor(hit.point.y / 1.0f) * 1;
-                    float z = Mathf.Floor(hit.point.z / 1.0f) * 1;
+                    float x = Mathf.Floor(hit.point.x / gridSize) * gridSize;
+                    float y = Mathf.Floor(hit.point.y / gridSize) * gridSize;
+                    float z = Mathf.Floor(hit.point.z / gridSize) * gridSize;
                     Vector3 n = new Vector3(x, y, z);
                     currTower.transform.position = n;
                 }   

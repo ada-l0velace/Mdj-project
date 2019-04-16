@@ -7,6 +7,7 @@ TagManager:
   - PlacebleObject
   - Enemy
   - Tower
+  - WayPoint
   layers:
   - Default
   - TransparentFX

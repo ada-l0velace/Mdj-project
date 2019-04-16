@@ -1668,6 +1668,7 @@ MonoBehaviour:
   textureAtlas: {fileID: 2100000, guid: 600ecc57842de54489f81c605a5120cc, type: 2}
   meshSurface: {fileID: 0}
   startPosition: {fileID: 1755412496}
+  endPosition: {fileID: 2134015872}
 --- !u!4 &1226617240
 Transform:
   m_ObjectHideFlags: 0
@@ -1710,13 +1711,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - enemy: {fileID: 8157574263659139374, guid: 242a3b307f6042147b445b8537cd5b90, type: 3}
+  - enemy: {fileID: 2377171785519005193, guid: bed8613c3d1f5524aa20dd6524880f83, type: 3}
     count: 5
     rate: 1
-  - enemy: {fileID: 8157574263659139374, guid: 242a3b307f6042147b445b8537cd5b90, type: 3}
+  - enemy: {fileID: 2377171785519005193, guid: bed8613c3d1f5524aa20dd6524880f83, type: 3}
     count: 10
     rate: 1
-  - enemy: {fileID: 8157574263659139374, guid: 242a3b307f6042147b445b8537cd5b90, type: 3}
+  - enemy: {fileID: 2377171785519005193, guid: bed8613c3d1f5524aa20dd6524880f83, type: 3}
     count: 15
     rate: 1
   spawnPoint: {fileID: 1755412496}
@@ -2296,7 +2297,7 @@ GameObject:
   - component: {fileID: 1755412496}
   m_Layer: 0
   m_Name: StartPosition
-  m_TagString: Untagged
+  m_TagString: WayPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2309,7 +2310,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1755412495}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23, y: 4, z: -20}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2910,3 +2911,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2037053913}
   m_CullTransparentMesh: 0
+--- !u!1 &2134015871
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2134015872}
+  m_Layer: 0
+  m_Name: EndPosition
+  m_TagString: WayPoint
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2134015872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134015871}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

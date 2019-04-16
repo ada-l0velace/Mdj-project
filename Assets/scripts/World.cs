@@ -20,7 +20,7 @@ public class World : MonoBehaviour {
     public Transform endPosition;
 
     int[,] map = new int[,]  {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-                                {1,2,1,0,0,0,0,0,0,0,0,1,1,0,1,1},
+                                {1,2,1,0,0,0,0,0,0,0,0,1,1,3,1,1},
                                 {1,0,1,0,1,1,1,1,1,1,0,1,1,0,1,1},
                                 {1,0,1,0,0,0,0,0,1,1,0,1,1,0,1,1},
                                 {1,0,1,1,1,1,1,0,1,1,0,1,1,0,1,1},
@@ -77,11 +77,11 @@ public class World : MonoBehaviour {
             BuildChunkAt(i, k, j);
         else if (map[7 + i, 7 + j] == 2) {
             //BuildChunkAt(i, k, j);
-            startPosition.transform.position = new Vector3(BuildChunkAt(i, k, j, ItemTexture.Stone, ItemTexture.Stone).chunk.transform.position.x,World.chunkSize, c.chunk.transform.position.z);
+            startPosition.position = new Vector3(BuildChunkAt(i, k, j, ItemTexture.Stone, ItemTexture.Stone).chunk.transform.position.x,World.chunkSize, c.chunk.transform.position.z);
         }
 
         else if (map[7 + i, 7 + j] == 3) {
-            BuildChunkAt(i, k, j, ItemTexture.Stone, ItemTexture.Stone);
+            endPosition.position = new Vector3(BuildChunkAt(i, k, j, ItemTexture.Stone, ItemTexture.Stone).chunk.transform.position.x, World.chunkSize, c.chunk.transform.position.z);
         }
 
         else {
