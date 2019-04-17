@@ -18,6 +18,8 @@ public class World : MonoBehaviour {
     public Chunk c;
     public Transform startPosition;
     public Transform endPosition;
+    public GameObject canvas;
+    public Slider healthBar;
 
     int[,] map = new int[,]  {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                                 {1,2,1,0,0,0,0,0,0,0,0,1,1,3,1,1},

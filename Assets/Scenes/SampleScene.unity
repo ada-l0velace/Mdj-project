@@ -1414,10 +1414,10 @@ RectTransform:
   m_Father: {fileID: 1795568173}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -90.1, y: 97.5}
-  m_SizeDelta: {x: 180.38, y: 166.42}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 301.4, y: -185.5}
+  m_SizeDelta: {x: -602.62, y: -399.58002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &933261071
 MonoBehaviour:
@@ -1669,6 +1669,9 @@ MonoBehaviour:
   meshSurface: {fileID: 0}
   startPosition: {fileID: 1755412496}
   endPosition: {fileID: 2134015872}
+  canvas: {fileID: 1795568169}
+  healthBar: {fileID: 2899764074451642660, guid: e4d7bda4fe5dbda4192aae2ab70ffae2,
+    type: 3}
 --- !u!4 &1226617240
 Transform:
   m_ObjectHideFlags: 0
@@ -1697,7 +1700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildTower: 0
   button: {fileID: 447599195}
-  tower: {fileID: 9102435607076391277, guid: f7f09e1ad0edcbd458a8c3454c8e5a6d, type: 3}
+  tower: {fileID: 1743698460752133724, guid: f33ff1a80fb095447a4f4ced55892e5e, type: 3}
 --- !u!114 &1226617242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1711,13 +1714,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - enemy: {fileID: 2377171785519005193, guid: bed8613c3d1f5524aa20dd6524880f83, type: 3}
+  - enemy: {fileID: 9079891180741884839, guid: 89cf75d364107d443a748e1ea96ac9f0, type: 3}
     count: 5
     rate: 1
-  - enemy: {fileID: 2377171785519005193, guid: bed8613c3d1f5524aa20dd6524880f83, type: 3}
+  - enemy: {fileID: 9079891180741884839, guid: 89cf75d364107d443a748e1ea96ac9f0, type: 3}
     count: 10
     rate: 1
-  - enemy: {fileID: 2377171785519005193, guid: bed8613c3d1f5524aa20dd6524880f83, type: 3}
+  - enemy: {fileID: 9079891180741884839, guid: 89cf75d364107d443a748e1ea96ac9f0, type: 3}
     count: 15
     rate: 1
   spawnPoint: {fileID: 1755412496}

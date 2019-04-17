@@ -47,6 +47,7 @@ public class Turret : MonoBehaviour {
         if (nearestEnemy != null && shortestDistance <= range) {
             target = nearestEnemy.transform;
             targetEnemy = nearestEnemy.GetComponent<Enemy>();
+
         }
         else {
             target = null;
