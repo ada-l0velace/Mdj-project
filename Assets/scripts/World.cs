@@ -16,6 +16,7 @@ public class World : MonoBehaviour {
     public Vector3[,,] allVertices = new Vector3[chunkSize + 1, chunkSize + 1, chunkSize + 1];
     public static ConcurrentDictionary<string, Chunk> chunks;
     public Chunk c;
+    public Grid grid;
     public Transform startPosition;
     public Transform endPosition;
     public GameObject canvas;
@@ -55,6 +56,9 @@ public class World : MonoBehaviour {
         c = new Chunk(chunkPostion, textureAtlas);
         c.chunk.transform.parent = this.transform;
         chunks.TryAdd(c.chunk.name, c);
+        if (y > 0) {
+            c.chunk.tag = "PlacebleObject";
+        }
         return c;
     }
 
@@ -64,6 +68,9 @@ public class World : MonoBehaviour {
         c = new Chunk(chunkPostion, top, bot ,textureAtlas);
         c.chunk.transform.parent = this.transform;
         chunks.TryAdd(c.chunk.name, c);
+        if (y > 0) {
+            c.chunk.tag = "PlacebleObject";
+        }
         return c;
     }
 
@@ -101,6 +108,7 @@ public class World : MonoBehaviour {
                     allVertices[x, y, z] = new Vector3(x, y, z);
                 }
         chunks = new ConcurrentDictionary<string, Chunk>();
+        grid = new Grid(chunkSize, 8);
         for (int j = 0; j < 8; j++) {
             for (int i = 0; i < 8; i++) {
 

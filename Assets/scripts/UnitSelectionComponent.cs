@@ -50,6 +50,9 @@ public class UnitSelectionComponent : MonoBehaviour {
                         selectableObject.selectionCircle = Instantiate(selectionCirclePrefab);
                         selectableObject.selectionCircle.transform.SetParent(selectableObject.transform, false);
                         selectableObject.selectionCircle.transform.eulerAngles = new Vector3(90, 0, 0);
+                        Projector p = selectableObject.selectionCircle.GetComponent<Projector>();
+                        p.farClipPlane = 2;
+                        //Debug.Log(p.farClipPlane);
                     }
                 }
                 else {

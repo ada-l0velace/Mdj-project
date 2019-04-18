@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class script : MonoBehaviour
+public class PlaceTower : MonoBehaviour
 {
     public bool buildTower;
     public Button button;
@@ -39,20 +39,21 @@ public class script : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if(Physics.Raycast(ray, out hit, Mathf.Infinity) && currTower) {
-                if (hit.collider.tag == "PlacebleObject") {
-                    float x = Mathf.Floor(hit.point.x / gridSize) * gridSize;
-                    float y = Mathf.Floor(hit.point.y / gridSize) * gridSize;
-                    float z = Mathf.Floor(hit.point.z / gridSize) * gridSize;
+                float x = Mathf.Floor(hit.point.x / gridSize) * gridSize;
+                float y = Mathf.Floor(hit.point.y / gridSize) * gridSize;
+                float z = Mathf.Floor(hit.point.z / gridSize) * gridSize;
+                Grid grid = World.Instance.grid;
+                if (hit.collider.tag == "PlacebleObject" && grid.IsBuildable((int)x,(int)z) && y >= 8) {
+                    
                     Vector3 n = new Vector3(x, y, z);
                     currTower.transform.position = n;
-                }   
-                //Debug.DrawRay(hit);
-                //Debug.Log(hit.transform.position);
-
-                currTower = null;
-                if (Input.GetKey("left shift")) {
-                    clicked();
+                    currTower = null;
+                    if (Input.GetKey("left shift")) {
+                        clicked();
+                    }
+                    grid.OcupyPosition((int)x, (int)z);
                 }
+
             }
         }
         else if (currTower != null) {
@@ -60,11 +61,15 @@ public class script : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if(Physics.Raycast(ray, out hit) && currTower) {
-                if (hit.collider.tag == "PlacebleObject") {
-                    float x = Mathf.Floor(hit.point.x/1.0f) * 1;
-                    float y = Mathf.Floor(hit.point.y / 1.0f) * 1;
-                    float z = Mathf.Floor(hit.point.z / 1.0f) * 1;
+                float x = Mathf.Floor(hit.point.x / 1.0f) * 1;
+                float y = Mathf.Floor(hit.point.y / 1.0f) * 1;
+                float z = Mathf.Floor(hit.point.z / 1.0f) * 1;
+                Grid grid = World.Instance.grid;
+ 
+                if (hit.collider.tag == "PlacebleObject" && y >=8) {
+
                     Vector3 n = new Vector3(x, y, z);
+                    //Debug.Log(n.ToString());
                     currTower.transform.position = n;
                 }
                 //Debug.DrawRay(hit);

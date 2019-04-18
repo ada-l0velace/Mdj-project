@@ -108,7 +108,7 @@ public class Chunk {
 
         MeshCollider collider = chunk.gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
         collider.sharedMesh = chunk.transform.GetComponent<MeshFilter>().mesh;
-        collider.tag = "PlacebleObject";
+        //collider.tag = "PlacebleObject";
         status = ChunkStatus.DONE;
     }
 

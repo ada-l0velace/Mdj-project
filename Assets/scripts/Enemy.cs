@@ -41,8 +41,8 @@ public class Enemy : MonoBehaviour {
         //    hpBar = child;
         //    break;
         //}
-        healthBar = Instantiate(World.Instance.healthBar);
-        healthBar.transform.SetParent(canvas.transform, false);
+        healthBar = Instantiate(World.Instance.healthBar, Camera.main.WorldToScreenPoint((Vector3.up * 0.1f) + transform.position), Quaternion.identity, canvas.transform);
+        //healthBar.transform.SetParent(canvas.transform, false);
         moving = false;
     }
 
@@ -55,7 +55,11 @@ public class Enemy : MonoBehaviour {
         }
         //Debug.Log(Vector3.Distance(transform.position, destination));
         if (Vector3.Distance(transform.position, endPosition.transform.position) <= 1.2f) {
+            GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
+            Destroy(effect, 5f);
+            DestroyImmediate(healthBar.gameObject);
             DestroyImmediate(gameObject);
+            return;
         }
         healthBar.transform.position = Camera.main.WorldToScreenPoint((Vector3.up * 0.1f) + transform.position);
 
