@@ -1,0 +1,179 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 400002}
+  - component: {fileID: 11400000}
+  - component: {fileID: 11400004}
+  m_Layer: 0
+  m_Name: Hose
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &400002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100002}
+  m_LocalRotation: {x: 0.17216294, y: 0.1285432, z: 0.022665681, w: -0.97638255}
+  m_LocalPosition: {x: 2, y: -0.5, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400008}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 915950f1f73ea9e429d92b7226238623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPower: 20
+  minPower: 5
+  changeSpeed: 5
+  hoseWaterSystems:
+  - {fileID: 19800004}
+  - {fileID: 19800008}
+  - {fileID: 19800000}
+  - {fileID: 19800006}
+  systemRenderer: {fileID: 19900004}
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cadd54e4832aeef4b9359f44cbe335cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationRange: {x: 70, y: 90}
+  rotationSpeed: 10
+  dampingTime: 0.2
+  autoZeroVerticalOnMobile: 0
+  autoZeroHorizontalOnMobile: 0
+  relative: 0
+--- !u!1001 &394182831223483577
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 400002}
+    m_Modifications:
+    - target: {fileID: 394182831223581201, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+        type: 3}
+      propertyPath: m_Name
+      value: WaterShower
+      objectReference: {fileID: 0}
+    - target: {fileID: 394182831223617073, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 394182831223617073, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 394182831223617073, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 394182831223617073, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 394182831223617073, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 394182831223617073, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 394182831223617073, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 394182831223617073, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 394182831223617073, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 394182831223617073, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 394182831223617073, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 13f5cf6ee66d4f241944cc6598bed1c8, type: 3}
+--- !u!4 &400008 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 394182831223617073, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 394182831223483577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &19800006 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 394182831205266303, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 394182831223483577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &19800004 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 394182831205266301, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 394182831223483577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!199 &19900004 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 394182831205354205, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 394182831223483577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &19800008 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 394182831205266289, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 394182831223483577}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &19800000 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 394182831205266297, guid: 13f5cf6ee66d4f241944cc6598bed1c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 394182831223483577}
+  m_PrefabAsset: {fileID: 0}

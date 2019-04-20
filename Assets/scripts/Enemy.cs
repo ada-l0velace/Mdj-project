@@ -3,30 +3,30 @@ using UnityEngine.UI;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour {
+    public enum ElementType { WATER, FIRE, EARTH, ICE };
 
     public float startSpeed = 10f;
-   
+    public ElementType eType;
     public Transform endPosition;
     public GameObject canvas;
     public bool moving;
     [HideInInspector]
     public NavMeshAgent m_Agent;
     public float speed;
+   
 
     public float startHealth = 100;
-    private float health;
+    public float health;
 
     public int worth = 50;
 
     public GameObject deathEffect;
-
+    UnitGUI selectedUnit;
     [Header("Unity Stuff")]
     public Slider healthBar;
-    //Image hpBar;
-
     private bool isDead = false;
 
-    void Start() {
+    public void Start() {
         this.enabled = true;
         speed = startSpeed;
         health = startHealth;
@@ -41,7 +41,10 @@ public class Enemy : MonoBehaviour {
         //    hpBar = child;
         //    break;
         //}
+        //selectedUnit = new UnitGUI(this);
         healthBar = Instantiate(World.Instance.healthBar, Camera.main.WorldToScreenPoint((Vector3.up * 0.1f) + transform.position), Quaternion.identity, canvas.transform);
+        
+        //previewCam= Instantiate(cam, transform.position + transform.forward * 1, transform.rotation);
         //healthBar.transform.SetParent(canvas.transform, false);
         moving = false;
     }
@@ -62,7 +65,7 @@ public class Enemy : MonoBehaviour {
             return;
         }
         healthBar.transform.position = Camera.main.WorldToScreenPoint((Vector3.up * 0.1f) + transform.position);
-
+        //previewCam.transform.position = Camera.main.WorldToScreenPoint((Vector3.forward * 1) + transform.position);
     }
 
     public void TakeDamage(float amount) {
@@ -70,6 +73,8 @@ public class Enemy : MonoBehaviour {
 
         healthBar.value = health / startHealth;
 
+        
+        //selectedUnit.UpdateHealthBar(s, healthBar.value);
         if (health <= 0 && !isDead) {
             Die();
         }
@@ -93,4 +98,13 @@ public class Enemy : MonoBehaviour {
         DestroyImmediate(gameObject);
     }
 
+    private void OnMouseOver() {
+        //if (canvas.ge) {
+        //    unitSelectedGUI = Instantiate(unitSelected, World.Instance.canvas.transform, false);
+        if(Input.GetMouseButtonDown(1)){
+            UnitGUI.enemy = this;
+            //unitSelectedGUI = selectedUnit.UpdateStats(s);
+            //selectedUnit.UpdateHealthBar(s, healthBar.value);
+        }
+    }
 }

@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        
         if (target == null) {
             Destroy(gameObject);
             return;
@@ -22,8 +23,9 @@ public class Bullet : MonoBehaviour {
 
         Vector3 dir = target.position - transform.position;
         float distanceThisFrame = speed * Time.deltaTime;
-
+        Debug.Log("WTF");
         if (dir.magnitude <= distanceThisFrame) {
+           
             HitTarget();
             return;
         }
@@ -32,15 +34,15 @@ public class Bullet : MonoBehaviour {
         transform.LookAt(target);
     }
 
-    void Damage(Transform enemy) {
+    protected virtual void Damage(Transform enemy) {
+        
         Enemy e = enemy.GetComponent<Enemy>();
-
         if (e != null) {
             e.TakeDamage(damage);
         }
     }
 
-    void Explode() {
+    protected virtual void Explode() {
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider collider in colliders) {
             if (collider.tag == "Enemy") {

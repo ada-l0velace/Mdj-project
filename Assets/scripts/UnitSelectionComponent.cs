@@ -8,11 +8,18 @@ using System.Text;
 public class UnitSelectionComponent : MonoBehaviour {
     bool isSelecting = false;
     Vector3 mousePosition1;
+    public GameObject unitSelected;
+  
 
     public GameObject selectionCirclePrefab;
+    
+    private void Start() {
+        
+    }
 
     void Update() {
         // If we press the left mouse button, begin selection and remember the location of the mouse
+        
         if (Input.GetMouseButtonDown(0)) {
             isSelecting = true;
             mousePosition1 = Input.mousePosition;
@@ -42,6 +49,48 @@ public class UnitSelectionComponent : MonoBehaviour {
             isSelecting = false;
         }
 
+        if (Input.GetMouseButtonDown(1)) {
+            //isSelecting = true;
+            //mousePosition1 = Input.mousePosition;
+
+            foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
+                if (selectableObject.selectionCircle != null) {
+                    Destroy(selectableObject.selectionCircle.gameObject);
+                    selectableObject.selectionCircle = null;
+                }
+            }
+
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
+                if (Physics.Raycast(ray, out hit)) {
+                    if ((hit.transform.tag == "Enemy") &&
+                        selectableObject.GetHashCode() == hit.transform.GetComponent<SelectableUnitComponent>().GetHashCode() &&
+                        selectableObject.selectionCircle == null) {
+                        
+                        selectableObject.selectionCircle = Instantiate(selectionCirclePrefab);
+                        selectableObject.selectionCircle.transform.SetParent(selectableObject.transform, false);
+                        selectableObject.selectionCircle.transform.eulerAngles = new Vector3(90, 0, 0);
+                        Projector p = selectableObject.selectionCircle.GetComponent<Projector>();
+                        p.farClipPlane = 2;
+                        //Debug.Log(p.farClipPlane);
+                    }
+                    else if (hit.transform.tag != "Enemy" && World.Instance.selectedDetails) {
+                        UnitGUI.enemy = null;
+                    }
+                }
+                else {
+                    
+                    if (selectableObject.selectionCircle != null) {
+                        Destroy(selectableObject.selectionCircle.gameObject);
+                        selectableObject.selectionCircle = null;
+                        
+                    }
+                    
+                }
+            }
+        }
+
         // Highlight all objects within the selection box
         if (isSelecting) {
             foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
@@ -56,9 +105,13 @@ public class UnitSelectionComponent : MonoBehaviour {
                     }
                 }
                 else {
+                    if (World.Instance.selectedDetails)
+                        UnitGUI.enemy = null;
                     if (selectableObject.selectionCircle != null) {
+                        
                         Destroy(selectableObject.selectionCircle.gameObject);
                         selectableObject.selectionCircle = null;
+                        
                     }
                 }
             }

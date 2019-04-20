@@ -13,6 +13,7 @@ public class UnitSpawner : MonoBehaviour
 
     public float timeBetweenWaves = 15f;
     private float countdown = 1f;
+    int counter = 0;
 
     public Text waveNumber;
     public Text waveCountdownText;
@@ -33,6 +34,7 @@ public class UnitSpawner : MonoBehaviour
         }
 
         if (countdown <= 0f) {
+            counter++;
             StartCoroutine(SpawnWave());
             countdown = timeBetweenWaves;
             return;
@@ -41,7 +43,7 @@ public class UnitSpawner : MonoBehaviour
         countdown -= Time.deltaTime;
 
         countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
-        waveNumber.text = "Wave " + (waveIndex+1);
+        waveNumber.text = "Wave " + (counter);
         waveCountdownText.text = string.Format("{0:00.00}", countdown);
     }
 

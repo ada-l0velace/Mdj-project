@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grid {
+public class GridMap {
     int chunkSize;
     int mapSize;
 
     Node[,] nodes;
-    public Grid(int chunkSize, int mapSize) {
+    public GridMap(int chunkSize, int mapSize) {
         this.chunkSize = chunkSize;
         this.mapSize = mapSize;
         nodes = new Node[chunkSize * mapSize*2, chunkSize * mapSize * 2];

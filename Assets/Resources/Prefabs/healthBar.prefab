@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 2899764074451642661}
   - component: {fileID: 2899764074451642660}
   m_Layer: 0
-  m_Name: Slider 1
+  m_Name: healthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,7 +257,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 2899764072849944394}
   m_HandleRect: {fileID: 0}

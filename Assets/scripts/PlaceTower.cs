@@ -42,7 +42,7 @@ public class PlaceTower : MonoBehaviour
                 float x = Mathf.Floor(hit.point.x / gridSize) * gridSize;
                 float y = Mathf.Floor(hit.point.y / gridSize) * gridSize;
                 float z = Mathf.Floor(hit.point.z / gridSize) * gridSize;
-                Grid grid = World.Instance.grid;
+                GridMap grid = World.Instance.grid;
                 if (hit.collider.tag == "PlacebleObject" && grid.IsBuildable((int)x,(int)z) && y >= 8) {
                     
                     Vector3 n = new Vector3(x, y, z);
@@ -64,7 +64,7 @@ public class PlaceTower : MonoBehaviour
                 float x = Mathf.Floor(hit.point.x / 1.0f) * 1;
                 float y = Mathf.Floor(hit.point.y / 1.0f) * 1;
                 float z = Mathf.Floor(hit.point.z / 1.0f) * 1;
-                Grid grid = World.Instance.grid;
+                GridMap grid = World.Instance.grid;
  
                 if (hit.collider.tag == "PlacebleObject" && y >=8) {
 
