@@ -23,6 +23,7 @@ public class PlaceTower : MonoBehaviour
         
         GameObject e = (GameObject) Instantiate(tower);
         e.AddComponent<SelectableUnitComponent>();
+        
         currTower = e;
         currentPos.y = transform.position.y;
         //e.transform.SetParent(gameObject.transform);
@@ -47,7 +48,9 @@ public class PlaceTower : MonoBehaviour
                     
                     Vector3 n = new Vector3(x, y, z);
                     currTower.transform.position = n;
+                    currTower.GetComponent<Turret>().isBuilding = false;
                     currTower = null;
+
                     if (Input.GetKey("left shift")) {
                         clicked();
                     }

@@ -9,6 +9,7 @@ public class Turret : MonoBehaviour {
     [Header("General")]
 
     public float range = 15f;
+    public bool isBuilding = true;
 
     [Header("Use Bullets (default)")]
     public GameObject bulletPrefab;
@@ -57,18 +58,19 @@ public class Turret : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (target == null) {
-            return;
+        if (!isBuilding) { 
+            if (target == null) {
+                return;
+            }
+
+            LockOnTarget();
+            if (fireCountdown <= 0f) {
+                Shoot();
+                fireCountdown = 1f / fireRate;
+            }
+
+            fireCountdown -= Time.deltaTime;
         }
-
-        LockOnTarget();
-        if (fireCountdown <= 0f) {
-            Shoot();
-            fireCountdown = 1f / fireRate;
-        }
-
-        fireCountdown -= Time.deltaTime;
-
     }
 
     void LockOnTarget() {
