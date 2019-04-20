@@ -18,6 +18,7 @@ public class UnitGUI : MonoBehaviour {
     public void UpdateStats() {
         var texts = current.GetComponentsInChildren<Text>();
         texts[3].text = "Cube";
+        texts[0].text = "Type: " + enemy.eType.ToString();
         texts[1].text = "Speed: "+GetSpeed().ToString();
         texts[2].text = "Resistance: ";
     }

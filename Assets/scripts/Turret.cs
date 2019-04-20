@@ -5,9 +5,9 @@ public class Turret : MonoBehaviour {
 
     private Transform target;
     private Enemy targetEnemy;
-
+    
     [Header("General")]
-
+    public TurretBlueprint turretBlueprint;
     public float range = 15f;
     public bool isBuilding = true;
 

@@ -17,15 +17,16 @@ public class PlaceTower : MonoBehaviour
         button.onClick.AddListener(this.clicked);
     }
 
-    void clicked()
-    {
-        buildTower = true;
+    void clicked() {
+        bool canBuy = tower.GetComponent<Turret>().turretBlueprint.cost <= PlayerStats.Money;
+        if (canBuy) { 
+            buildTower = true;
+            GameObject e = (GameObject) Instantiate(tower);
+            e.AddComponent<SelectableUnitComponent>();
         
-        GameObject e = (GameObject) Instantiate(tower);
-        e.AddComponent<SelectableUnitComponent>();
-        
-        currTower = e;
-        currentPos.y = transform.position.y;
+            currTower = e;
+            currentPos.y = transform.position.y;
+        }
         //e.transform.SetParent(gameObject.transform);
         //e.transform.localPosition = new Vector3(Input.mousePosition.x, 1, Input.mousePosition.z);
         /*
@@ -35,7 +36,7 @@ public class PlaceTower : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetMouseButtonDown(0)){
+        if (Input.GetMouseButtonDown(0)) {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -44,17 +45,21 @@ public class PlaceTower : MonoBehaviour
                 float y = Mathf.Floor(hit.point.y / gridSize) * gridSize;
                 float z = Mathf.Floor(hit.point.z / gridSize) * gridSize;
                 GridMap grid = World.Instance.grid;
-                if (hit.collider.tag == "PlacebleObject" && grid.IsBuildable((int)x,(int)z) && y >= 8) {
+                Turret turret = currTower.GetComponent<Turret>();
+                bool canBuy = turret.turretBlueprint.cost <= PlayerStats.Money;
+                
+                if (hit.collider.tag == "PlacebleObject" && grid.IsBuildable((int)x,(int)z) && y >= 8 && canBuy) {
                     
                     Vector3 n = new Vector3(x, y, z);
                     currTower.transform.position = n;
-                    currTower.GetComponent<Turret>().isBuilding = false;
+                    turret.isBuilding = false;
                     currTower = null;
-
+                   
                     if (Input.GetKey("left shift")) {
                         clicked();
                     }
                     grid.OcupyPosition((int)x, (int)z);
+                    PlayerStats.Money -= turret.turretBlueprint.cost;
                 }
 
             }
@@ -68,7 +73,7 @@ public class PlaceTower : MonoBehaviour
                 float y = Mathf.Floor(hit.point.y / 1.0f) * 1;
                 float z = Mathf.Floor(hit.point.z / 1.0f) * 1;
                 GridMap grid = World.Instance.grid;
- 
+                
                 if (hit.collider.tag == "PlacebleObject" && y >=8) {
 
                     Vector3 n = new Vector3(x, y, z);
@@ -77,6 +82,12 @@ public class PlaceTower : MonoBehaviour
                 }
                 //Debug.DrawRay(hit);
                 //Debug.Log(hit.transform.position);
+            }
+        }
+        if (Input.GetKeyUp(KeyCode.Escape)) {
+            if(currTower != null) { 
+                Destroy(currTower);
+                currTower = null;
             }
         }
         //Debug.Log(Input.mousePosition);

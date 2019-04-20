@@ -59,6 +59,7 @@ public class Enemy : MonoBehaviour {
         //Debug.Log(Vector3.Distance(transform.position, destination));
         if (Vector3.Distance(transform.position, endPosition.transform.position) <= 1.2f) {
             GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
+            PlayerStats.Lives--;
             Destroy(effect, 5f);
             DestroyImmediate(healthBar.gameObject);
             DestroyImmediate(gameObject);
@@ -87,13 +88,14 @@ public class Enemy : MonoBehaviour {
     void Die() {
         isDead = true;
 
-        //PlayerStats.Money += worth;
+        PlayerStats.Money += worth;
 
         GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(effect, 5f);
         //healthBar.transform.SetParent(null);
         DestroyImmediate(healthBar.gameObject);
-        //WaveSpawner.EnemiesAlive--;
+        UnitSpawner.EnemiesAlive--;
+        
 
         DestroyImmediate(gameObject);
     }
