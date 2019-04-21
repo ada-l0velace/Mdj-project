@@ -12,21 +12,18 @@ public class SceneChanger : MonoBehaviour
     /// Loads the scene.
     /// </summary>
     /// <param name="sceneName">Scene name.</param>
-    public void LoadScene(string sceneName)
-    {
+    public void LoadScene(string sceneName) {
         SceneManager.LoadScene(sceneName);
     }
 
     /// <summary>
     /// Loads the current scene.
     /// </summary>
-    public void LoadCurrentScene()
-    {
+    public void LoadCurrentScene(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void ExitApp()
-    {
+    public void ExitApp() {
     #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
     #else
