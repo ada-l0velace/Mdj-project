@@ -2140,6 +2140,7 @@ MonoBehaviour:
     rate: 1.5
   spawnPoint: {fileID: 1755412496}
   timeBetweenWaves: 15
+  gameManager: {fileID: 1226617248}
   waveNumber: {fileID: 1640257907}
   waveCountdownText: {fileID: 1546329298}
 --- !u!114 &1226617243
@@ -2735,7 +2736,7 @@ PrefabInstance:
     - target: {fileID: 5753589635521793990, guid: 2bc5720948ee99746b76e1d2a95d767a,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8547187206134467068, guid: 2bc5720948ee99746b76e1d2a95d767a,
         type: 3}
@@ -2850,12 +2851,12 @@ PrefabInstance:
     - target: {fileID: 5009320754078957749, guid: 2bc5720948ee99746b76e1d2a95d767a,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5009320754078957749, guid: 2bc5720948ee99746b76e1d2a95d767a,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8355834949313277671, guid: 2bc5720948ee99746b76e1d2a95d767a,
         type: 3}

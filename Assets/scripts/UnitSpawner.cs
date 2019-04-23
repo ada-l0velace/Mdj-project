@@ -14,7 +14,7 @@ public class UnitSpawner : MonoBehaviour
     public float timeBetweenWaves = 15f;
     private float countdown = 1f;
     int counter = 0;
-
+    public GameManager gameManager;
     public Text waveNumber;
     public Text waveCountdownText;
 
@@ -23,12 +23,12 @@ public class UnitSpawner : MonoBehaviour
     private int waveIndex = 0;
 
     void Update() {
-        /*if (EnemiesAlive > 0) {
+        if (EnemiesAlive > 0) {
             return;
-        }*/
+        }
         //Debug.Log(waveIndex);
         if (waveIndex == waves.Length) {
-            //gameManager.WinLevel();
+            gameManager.WinLevel();
             waveCountdownText.text = "0:00.00";
             this.enabled = false;
         }
@@ -48,7 +48,7 @@ public class UnitSpawner : MonoBehaviour
     }
 
     IEnumerator SpawnWave() {
-        //PlayerStats.Rounds++;
+        PlayerStats.Rounds++;
 
         Wave wave = waves[waveIndex];
 
