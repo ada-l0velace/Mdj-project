@@ -60,6 +60,7 @@ public class Enemy : MonoBehaviour {
         if (Vector3.Distance(transform.position, endPosition.transform.position) <= 1.2f) {
             GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
             PlayerStats.Lives--;
+            UnitSpawner.EnemiesAlive--;
             Destroy(effect, 5f);
             DestroyImmediate(healthBar.gameObject);
             DestroyImmediate(gameObject);
