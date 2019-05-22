@@ -53,6 +53,7 @@ public class PlaceTower : MonoBehaviour
                     Vector3 n = new Vector3(x, y, z);
                     currTower.transform.position = n;
                     turret.isBuilding = false;
+                    turret.GetComponent<LineRenderer>().enabled = false;
                     currTower = null;
                    
                     if (Input.GetKey("left shift")) {

@@ -10,6 +10,7 @@ public class Turret : MonoBehaviour {
     public TurretBlueprint turretBlueprint;
     public float range = 15f;
     public bool isBuilding = true;
+    public Material rangeIndicatorM;
 
     [Header("Use Bullets (default)")]
     public GameObject bulletPrefab;
@@ -31,6 +32,8 @@ public class Turret : MonoBehaviour {
     // Use this for initialization
     void Start() {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        gameObject.AddComponent<LineRenderer>();
+        CreatePoints();
     }
 
     void UpdateTarget() {
@@ -92,5 +95,47 @@ public class Turret : MonoBehaviour {
     void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
+    }
+    void CreatePoints() {
+        /*int segments = 50;
+
+        float xradius = range;
+
+        float yradius = range;
+        LineRenderer line = GetComponent<LineRenderer>();
+        line.material = rangeIndicatorM;
+        line.useWorldSpace = false;
+        line.positionCount = segments+1;
+        float x;
+        float y = 0.5f;
+        float z;
+
+        float angle = 20f;
+
+        for (int i = 0; i < (segments + 1); i++) {
+            x = Mathf.Sin(Mathf.Deg2Rad * angle) * xradius;
+            z = Mathf.Cos(Mathf.Deg2Rad * angle) * yradius;
+
+            line.SetPosition(i, new Vector3(x, y, z));
+
+            angle += (360f / segments);
+        }*/
+        var segments = 360;
+        var line = GetComponent<LineRenderer>();
+        line.useWorldSpace = false;
+        line.material = rangeIndicatorM;
+        line.startWidth = 0.5f;
+        line.endWidth = 0.5f;
+        line.positionCount = segments + 1;
+
+        var pointCount = segments + 1; // add extra point to make startpoint and endpoint the same to close the circle
+        var points = new Vector3[pointCount];
+
+        for (int i = 0; i < pointCount; i++) {
+            var rad = Mathf.Deg2Rad * (i * 360f / segments);
+            points[i] = new Vector3(Mathf.Sin(rad) * range, 0.5f, Mathf.Cos(rad) * range);
+        }
+
+        line.SetPositions(points);
     }
 }

@@ -209,6 +209,7 @@ MonoBehaviour:
     upgradeCost: 200
   range: 8
   isBuilding: 1
+  rangeIndicatorM: {fileID: 2100000, guid: ce8ccfcaf584cd44a99e601e7dfe1c62, type: 2}
   bulletPrefab: {fileID: 1881489165941746272, guid: c2cf6717cc24ff645b7c709c5e326150,
     type: 3}
   fireRate: 1

@@ -28,6 +28,9 @@ public class UnitSelectionComponent : MonoBehaviour {
                 if (selectableObject.selectionCircle != null) {
                     Destroy(selectableObject.selectionCircle.gameObject);
                     selectableObject.selectionCircle = null;
+                    LineRenderer lr = selectableObject.gameObject.GetComponent<LineRenderer>();
+                    if (lr != null)
+                        lr.enabled = false;
                 }
             }
         }
@@ -42,10 +45,14 @@ public class UnitSelectionComponent : MonoBehaviour {
 
             var sb = new StringBuilder();
             sb.AppendLine(string.Format("Selecting [{0}] Units", selectedObjects.Count));
-            foreach (var selectedObject in selectedObjects)
+            foreach (var selectedObject in selectedObjects) {
+                LineRenderer lr = selectedObject.gameObject.GetComponent<LineRenderer>();
+                if (lr != null)
+                    lr.enabled = true;
                 sb.AppendLine("-> " + selectedObject.gameObject.name);
+            }
             Debug.Log(sb.ToString());
-
+            
             isSelecting = false;
         }
 
@@ -57,6 +64,9 @@ public class UnitSelectionComponent : MonoBehaviour {
                 if (selectableObject.selectionCircle != null) {
                     Destroy(selectableObject.selectionCircle.gameObject);
                     selectableObject.selectionCircle = null;
+                    LineRenderer lr = selectableObject.gameObject.GetComponent<LineRenderer>();
+                    if (lr != null)
+                        lr.enabled = false;
                 }
             }
 
@@ -84,7 +94,9 @@ public class UnitSelectionComponent : MonoBehaviour {
                     if (selectableObject.selectionCircle != null) {
                         Destroy(selectableObject.selectionCircle.gameObject);
                         selectableObject.selectionCircle = null;
-                        
+                        LineRenderer lr = selectableObject.gameObject.GetComponent<LineRenderer>();
+                        if (lr != null)
+                            lr.enabled = false;
                     }
                     
                 }
@@ -111,7 +123,9 @@ public class UnitSelectionComponent : MonoBehaviour {
                         
                         Destroy(selectableObject.selectionCircle.gameObject);
                         selectableObject.selectionCircle = null;
-                        
+                        LineRenderer lr = selectableObject.gameObject.GetComponent<LineRenderer>();
+                        if (lr != null)
+                            lr.enabled = false;
                     }
                 }
             }
