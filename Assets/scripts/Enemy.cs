@@ -10,11 +10,12 @@ public class Enemy : MonoBehaviour {
     public Transform endPosition;
     public GameObject canvas;
     public bool moving;
+
     [HideInInspector]
     public NavMeshAgent m_Agent;
     public float speed;
+    private PIDRigidbody pid;
    
-
     public float startHealth = 100;
     public float health;
 
@@ -32,8 +33,11 @@ public class Enemy : MonoBehaviour {
         health = startHealth;
         gameObject.tag = "Enemy";
         gameObject.AddComponent<SelectableUnitComponent>();
+        // !!!!!!!!!
+        /*
         if (m_Agent == null)
             m_Agent = gameObject.AddComponent<NavMeshAgent>();
+        */
         endPosition = World.Instance.endPosition;
         canvas = World.Instance.canvas;
         //hpBar = Instantiate(healthBar);
@@ -42,6 +46,7 @@ public class Enemy : MonoBehaviour {
         //    break;
         //}
         //selectedUnit = new UnitGUI(this);
+
         healthBar = Instantiate(World.Instance.healthBar, Camera.main.WorldToScreenPoint((Vector3.up * 0.1f) + transform.position), Quaternion.identity, canvas.transform);
         
         //previewCam= Instantiate(cam, transform.position + transform.forward * 1, transform.rotation);
@@ -54,7 +59,27 @@ public class Enemy : MonoBehaviour {
             if (m_Agent == null)
                 m_Agent = gameObject.AddComponent<NavMeshAgent>();
             m_Agent.destination = endPosition.transform.position;
+            m_Agent.updatePosition = false;
+            m_Agent.updateRotation = false;
+            m_Agent.updateUpAxis = false;
+            m_Agent.autoRepath = true;
+
+            pid = new PIDRigidbody(
+                new Vector3(1000, 0, 0),
+                new Vector3(0, 0, 0),
+                new Vector3(1000, 0, 1000),
+                new Vector3(0, 0, 0)
+                );
+
             moving = true;
+        }
+        if (moving)
+        {
+            Vector3 desiredVelocity = m_Agent.desiredVelocity;
+            Vector3 desiredOrientation = Quaternion.LookRotation(desiredVelocity, Vector3.up).eulerAngles;
+            pid.Update(GetComponent<Rigidbody>(), desiredVelocity, desiredOrientation, Time.deltaTime);
+            Rigidbody rb = GetComponent<Rigidbody>();
+            m_Agent.nextPosition = transform.position;
         }
         //Debug.Log(Vector3.Distance(transform.position, destination));
         if (Vector3.Distance(transform.position, endPosition.transform.position) <= 1.2f) {
@@ -67,6 +92,7 @@ public class Enemy : MonoBehaviour {
             return;
         }
         healthBar.transform.position = Camera.main.WorldToScreenPoint((Vector3.up * 0.1f) + transform.position);
+
         //previewCam.transform.position = Camera.main.WorldToScreenPoint((Vector3.forward * 1) + transform.position);
     }
 

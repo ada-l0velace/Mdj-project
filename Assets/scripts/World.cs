@@ -132,13 +132,18 @@ public class World : MonoBehaviour {
             }
         }
 
+        // lift up spawnpoint and put into center of chunk
+        startPosition.Translate(new Vector3(.5f*chunkSize, .5f*chunkSize, .5f*chunkSize));
+
         foreach (KeyValuePair<string, Chunk> c in chunks) {
             if (c.Value.status == Chunk.ChunkStatus.DRAW) {
                 c.Value.DrawChunk();
             }
         }
+
         meshSurface = this.gameObject.AddComponent<NavMeshSurface>();
         meshSurface.layerMask = 1;
+
         //StaticEditorFlags.OffMeshLinkGeneration = true;
         meshSurface.BuildNavMesh();
 

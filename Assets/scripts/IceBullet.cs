@@ -6,6 +6,7 @@ public class IceBullet : Bullet {
     protected override void Damage(Transform enemy) {
         Enemy e = enemy.GetComponent<Enemy>();
         float modifier = 1.0f;
+
         if (e.eType == Enemy.ElementType.ICE) {
             modifier -= 0.5f;
         }
@@ -14,6 +15,7 @@ public class IceBullet : Bullet {
         }
         
         if (e != null) {
+            ImpactEnemyPhysics(e);
             e.TakeDamage(damage*modifier);
         }
     }

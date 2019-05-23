@@ -35,7 +35,6 @@ public class Bullet : MonoBehaviour {
     }
 
     protected virtual void Damage(Transform enemy) {
-        
         Enemy e = enemy.GetComponent<Enemy>();
         if (e != null) {
             e.TakeDamage(damage);
@@ -50,6 +49,28 @@ public class Bullet : MonoBehaviour {
             }
         }
     }
+
+    protected void ImpactEnemyPhysics(Enemy e)
+    {
+        Rigidbody rb = e.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            Vector3 force = transform.TransformDirection(new Vector3(0, 0, 1));
+            force = new Vector3(force.x, .2f, force.z).normalized;
+
+            force *= 3f;
+            rb.AddForceAtPosition(force, transform.position, ForceMode.Impulse);
+
+            float disturb = 2;
+            Vector3 torque = new Vector3(
+                (Random.value - .5f) * disturb,
+                (Random.value - .5f) * disturb,
+                (Random.value - .5f) * disturb
+                );
+            rb.AddTorque(torque, ForceMode.Impulse);
+        }
+    }
+
     void HitTarget() {
         GameObject effectInstance = (GameObject) Instantiate(impactEffect, transform.position, transform.rotation);
 
