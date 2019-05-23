@@ -81,8 +81,8 @@ public class Enemy : MonoBehaviour {
             Rigidbody rb = GetComponent<Rigidbody>();
             m_Agent.nextPosition = transform.position;
         }
-        //Debug.Log(Vector3.Distance(transform.position, destination));
-        if (Vector3.Distance(transform.position, endPosition.transform.position) <= 1.2f) {
+        //Debug.Log(Vector3.Distance(transform.position, endPosition.transform.position));
+        if (Vector3.Distance(transform.position, endPosition.transform.position) <= 2.5f) {
             GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
             PlayerStats.Lives--;
             UnitSpawner.EnemiesAlive--;
