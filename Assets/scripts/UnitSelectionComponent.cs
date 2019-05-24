@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine.EventSystems;
 
 public class UnitSelectionComponent : MonoBehaviour {
     bool isSelecting = false;
@@ -12,25 +13,35 @@ public class UnitSelectionComponent : MonoBehaviour {
   
 
     public GameObject selectionCirclePrefab;
-    
+
     private void Start() {
+
+    }
+    private void DisableSelection(SelectableUnitComponent selectableObject) {
+        Destroy(selectableObject.selectionCircle.gameObject);
+        selectableObject.selectionCircle = null;
+        LineRenderer lr = selectableObject.gameObject.GetComponent<LineRenderer>();
+        if (lr != null)
+            lr.enabled = false;
+        selectableObject.unitSelection.enabled = false;
         
     }
 
+    private void EnableSelection(SelectableUnitComponent selectableObject) {
+        LineRenderer lr = selectableObject.gameObject.GetComponent<LineRenderer>();
+        if (lr != null)
+            lr.enabled = true;
+        selectableObject.unitSelection.enabled = true;
+    }
     void Update() {
         // If we press the left mouse button, begin selection and remember the location of the mouse
-        
         if (Input.GetMouseButtonDown(0)) {
             isSelecting = true;
             mousePosition1 = Input.mousePosition;
 
             foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
                 if (selectableObject.selectionCircle != null) {
-                    Destroy(selectableObject.selectionCircle.gameObject);
-                    selectableObject.selectionCircle = null;
-                    LineRenderer lr = selectableObject.gameObject.GetComponent<LineRenderer>();
-                    if (lr != null)
-                        lr.enabled = false;
+                    DisableSelection(selectableObject);
                 }
             }
         }
@@ -46,9 +57,7 @@ public class UnitSelectionComponent : MonoBehaviour {
             var sb = new StringBuilder();
             sb.AppendLine(string.Format("Selecting [{0}] Units", selectedObjects.Count));
             foreach (var selectedObject in selectedObjects) {
-                LineRenderer lr = selectedObject.gameObject.GetComponent<LineRenderer>();
-                if (lr != null)
-                    lr.enabled = true;
+                EnableSelection(selectedObject);
                 sb.AppendLine("-> " + selectedObject.gameObject.name);
             }
             Debug.Log(sb.ToString());
@@ -56,49 +65,24 @@ public class UnitSelectionComponent : MonoBehaviour {
             isSelecting = false;
         }
 
+        // right click
         if (Input.GetMouseButtonDown(1)) {
-            //isSelecting = true;
-            //mousePosition1 = Input.mousePosition;
-
             foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
                 if (selectableObject.selectionCircle != null) {
-                    Destroy(selectableObject.selectionCircle.gameObject);
-                    selectableObject.selectionCircle = null;
-                    LineRenderer lr = selectableObject.gameObject.GetComponent<LineRenderer>();
-                    if (lr != null)
-                        lr.enabled = false;
+                    DisableSelection(selectableObject);
                 }
             }
-
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Boolean b = false;
             foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
-                if (Physics.Raycast(ray, out hit)) {
-                    if ((hit.transform.tag == "Enemy") &&
-                        selectableObject.GetHashCode() == hit.transform.GetComponent<SelectableUnitComponent>().GetHashCode() &&
-                        selectableObject.selectionCircle == null) {
-                        
-                        selectableObject.selectionCircle = Instantiate(selectionCirclePrefab);
-                        selectableObject.selectionCircle.transform.SetParent(selectableObject.transform, false);
-                        selectableObject.selectionCircle.transform.eulerAngles = new Vector3(90, 0, 0);
-                        Projector p = selectableObject.selectionCircle.GetComponent<Projector>();
-                        p.farClipPlane = 2;
-                        //Debug.Log(p.farClipPlane);
-                    }
-                    else if (hit.transform.tag != "Enemy" && World.Instance.selectedDetails) {
-                        UnitGUI.enemy = null;
-                    }
+                if (IsWithinBounds(selectableObject.gameObject) && !b) {
+                    selectableObject.selectionCircle = Instantiate(selectionCirclePrefab);
+                    EnableSelection(selectableObject);
+                    b = true;
                 }
                 else {
-                    
                     if (selectableObject.selectionCircle != null) {
-                        Destroy(selectableObject.selectionCircle.gameObject);
-                        selectableObject.selectionCircle = null;
-                        LineRenderer lr = selectableObject.gameObject.GetComponent<LineRenderer>();
-                        if (lr != null)
-                            lr.enabled = false;
+                        DisableSelection(selectableObject);
                     }
-                    
                 }
             }
         }
@@ -109,10 +93,11 @@ public class UnitSelectionComponent : MonoBehaviour {
                 if (IsWithinSelectionBounds(selectableObject.gameObject)) {
                     if (selectableObject.selectionCircle == null) {
                         selectableObject.selectionCircle = Instantiate(selectionCirclePrefab);
-                        selectableObject.selectionCircle.transform.SetParent(selectableObject.transform, false);
+                        EnableSelection(selectableObject);
+                        /*selectableObject.selectionCircle.transform.SetParent(selectableObject.transform, false);
                         selectableObject.selectionCircle.transform.eulerAngles = new Vector3(90, 0, 0);
                         Projector p = selectableObject.selectionCircle.GetComponent<Projector>();
-                        p.farClipPlane = 2;
+                        p.farClipPlane = 2;*/
                         //Debug.Log(p.farClipPlane);
                     }
                 }
@@ -120,12 +105,7 @@ public class UnitSelectionComponent : MonoBehaviour {
                     if (World.Instance.selectedDetails)
                         UnitGUI.enemy = null;
                     if (selectableObject.selectionCircle != null) {
-                        
-                        Destroy(selectableObject.selectionCircle.gameObject);
-                        selectableObject.selectionCircle = null;
-                        LineRenderer lr = selectableObject.gameObject.GetComponent<LineRenderer>();
-                        if (lr != null)
-                            lr.enabled = false;
+                        DisableSelection(selectableObject);
                     }
                 }
             }
@@ -137,7 +117,18 @@ public class UnitSelectionComponent : MonoBehaviour {
             return false;
 
         var camera = Camera.main;
+
+       
         var viewportBounds = Utils.GetViewportBounds(camera, mousePosition1, Input.mousePosition);
+        return viewportBounds.Contains(camera.WorldToViewportPoint(gameObject.transform.position));
+    }
+
+    public bool IsWithinBounds(GameObject gameObject) {
+        var camera = Camera.main;
+        Vector3 center = Input.mousePosition;
+        Vector3 upperBound = new Vector3(center.x - gameObject.transform.localScale.x*12, center.y+ gameObject.transform.localScale.y*12, 0);
+        Vector3 lowerBound = new Vector3(center.x + gameObject.transform.localScale.x*12, center.y - gameObject.transform.localScale.y*12, 0);
+        var viewportBounds = Utils.GetViewportBounds(camera, upperBound, lowerBound);
         return viewportBounds.Contains(camera.WorldToViewportPoint(gameObject.transform.position));
     }
 

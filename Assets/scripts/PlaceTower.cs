@@ -54,6 +54,8 @@ public class PlaceTower : MonoBehaviour
                     currTower.transform.position = n;
                     turret.isBuilding = false;
                     turret.GetComponent<LineRenderer>().enabled = false;
+
+                    turret.GetComponent<SelectableUnitComponent>().unitSelection.enabled = false;
                     currTower = null;
                    
                     if (Input.GetKey("left shift")) {
