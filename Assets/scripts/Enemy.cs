@@ -18,9 +18,8 @@ public class Enemy : MonoBehaviour {
    
     public float startHealth = 100;
     public float health;
-
-    public int worth = 50;
-
+    public LineRenderer unitSelection;
+    public int worth = 50; 
     public GameObject deathEffect;
     UnitGUI selectedUnit;
     [Header("Unity Stuff")]
@@ -32,7 +31,8 @@ public class Enemy : MonoBehaviour {
         speed = startSpeed;
         health = startHealth;
         gameObject.tag = "Enemy";
-        gameObject.AddComponent<SelectableUnitComponent>();
+        SelectableUnitComponent suc = gameObject.AddComponent<SelectableUnitComponent>();
+        unitSelection = suc.unitSelection;
         // !!!!!!!!!
         /*
         if (m_Agent == null)
@@ -92,7 +92,12 @@ public class Enemy : MonoBehaviour {
             return;
         }
         healthBar.transform.position = Camera.main.WorldToScreenPoint((Vector3.up * 0.1f) + transform.position);
-
+        if (unitSelection != null) {
+            unitSelection.transform.position = transform.position+ (Vector3.up * 0.1f);
+        }
+        else {
+            unitSelection = gameObject.GetComponent<SelectableUnitComponent>().unitSelection;
+        }
         //previewCam.transform.position = Camera.main.WorldToScreenPoint((Vector3.forward * 1) + transform.position);
     }
 
@@ -122,8 +127,7 @@ public class Enemy : MonoBehaviour {
         //healthBar.transform.SetParent(null);
         DestroyImmediate(healthBar.gameObject);
         UnitSpawner.EnemiesAlive--;
-        
-
+        DestroyImmediate(unitSelection.gameObject);
         DestroyImmediate(gameObject);
     }
 

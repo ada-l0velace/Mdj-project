@@ -13,14 +13,17 @@ public class SelectableUnitComponent : MonoBehaviour {
         SelectionPoints();
         unitSelection.enabled = false;
     }
+    private void Update() {
+        unitSelection.transform.position = transform.position + (Vector3.up * 0.1f);
+    }
 
     void SelectionPoints() {
         Color c1 = Color.green;
         Color c2 = Color.green;
         var segments = 360;
         GameObject g = new GameObject();
-        g.transform.SetParent(transform);
-        g.transform.localPosition = Vector3.zero;
+        //g.transform.SetParent(transform);
+        //g.transform.position = transform.position + (Vector3.up * 0.1f);
         unitSelection = g.AddComponent<LineRenderer>();
         unitSelection.material = new Material(Shader.Find("Sprites/Default"));
         unitSelection.useWorldSpace = false;
