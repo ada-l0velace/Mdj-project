@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour {
     public bool moving;
 
     [HideInInspector]
+    public IGUI enemyGUI;
     public NavMeshAgent m_Agent;
     public float speed;
     private PIDRigidbody pid;
@@ -21,7 +22,6 @@ public class Enemy : MonoBehaviour {
     public LineRenderer unitSelection;
     public int worth = 50; 
     public GameObject deathEffect;
-    UnitGUI selectedUnit;
     [Header("Unity Stuff")]
     public Slider healthBar;
     private bool isDead = false;
@@ -33,24 +33,10 @@ public class Enemy : MonoBehaviour {
         gameObject.tag = "Enemy";
         SelectableUnitComponent suc = gameObject.AddComponent<SelectableUnitComponent>();
         unitSelection = suc.unitSelection;
-        // !!!!!!!!!
-        /*
-        if (m_Agent == null)
-            m_Agent = gameObject.AddComponent<NavMeshAgent>();
-        */
         endPosition = World.Instance.endPosition;
         canvas = World.Instance.canvas;
-        //hpBar = Instantiate(healthBar);
-        //foreach (Image child in transform) {
-        //    hpBar = child;
-        //    break;
-        //}
-        //selectedUnit = new UnitGUI(this);
-
+        enemyGUI = new UnitEnemyGUI(this, World.Instance.selectedDetails);
         healthBar = Instantiate(World.Instance.healthBar, Camera.main.WorldToScreenPoint((Vector3.up * 0.1f) + transform.position), Quaternion.identity, canvas.transform);
-        
-        //previewCam= Instantiate(cam, transform.position + transform.forward * 1, transform.rotation);
-        //healthBar.transform.SetParent(canvas.transform, false);
         moving = false;
     }
 
@@ -83,12 +69,13 @@ public class Enemy : MonoBehaviour {
         }
         //Debug.Log(Vector3.Distance(transform.position, endPosition.transform.position));
         if (Vector3.Distance(transform.position, endPosition.transform.position) <= 2.5f) {
-            GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
+            Die();
+            //GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
             PlayerStats.Lives--;
-            UnitSpawner.EnemiesAlive--;
-            Destroy(effect, 5f);
-            DestroyImmediate(healthBar.gameObject);
-            DestroyImmediate(gameObject);
+            //UnitSpawner.EnemiesAlive--;
+            //Destroy(effect, 5f);
+            //DestroyImmediate(healthBar.gameObject);
+            //DestroyImmediate(gameObject);
             return;
         }
         healthBar.transform.position = Camera.main.WorldToScreenPoint((Vector3.up * 0.1f) + transform.position);
@@ -127,17 +114,20 @@ public class Enemy : MonoBehaviour {
         //healthBar.transform.SetParent(null);
         DestroyImmediate(healthBar.gameObject);
         UnitSpawner.EnemiesAlive--;
+        UnitGUI a = World.Instance.GetComponent<UnitGUI>();
+        if(a.currentUI != null && a.currentUI.GetHashCode() == enemyGUI.GetHashCode())
+            a.currentUI = null;
+        enemyGUI.DeactivateUI();
         DestroyImmediate(unitSelection.gameObject);
         DestroyImmediate(gameObject);
     }
 
-    private void OnMouseOver() {
-        //if (canvas.ge) {
-        //    unitSelectedGUI = Instantiate(unitSelected, World.Instance.canvas.transform, false);
-        if(Input.GetMouseButtonDown(1)){
-            UnitGUI.enemy = this;
-            //unitSelectedGUI = selectedUnit.UpdateStats(s);
-            //selectedUnit.UpdateHealthBar(s, healthBar.value);
-        }
+    public void activateUI() {
+        /*IGUI aux = World.Instance.GetComponent<UnitGUI>().currentUI;
+        if (aux != null) {
+            aux.DeactivateUI();
+        }*/
+        World.Instance.GetComponent<UnitGUI>().currentUI = enemyGUI;
+        enemyGUI.ActivateUI();
     }
 }

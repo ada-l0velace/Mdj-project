@@ -57,7 +57,7 @@ public class PlaceTower : MonoBehaviour
 
                     turret.GetComponent<SelectableUnitComponent>().unitSelection.enabled = false;
                     currTower = null;
-                   
+                    
                     if (Input.GetKey("left shift")) {
                         clicked();
                     }
