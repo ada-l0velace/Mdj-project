@@ -21,6 +21,7 @@ public class World : MonoBehaviour {
     public Transform endPosition;
 
     public GameObject selectedDetails;
+    public GameObject towerDetails;
     public GameObject canvas;
     public Slider healthBar;
 

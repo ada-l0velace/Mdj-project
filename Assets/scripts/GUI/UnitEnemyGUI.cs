@@ -32,7 +32,7 @@ public class UnitEnemyGUI : IGUI {
 
     public void UpdateHealthBar() {
         var slider = current.GetComponentInChildren<Slider>();
-        slider.value = enemy.health / enemy.startHealth;
+        slider.value = enemy.healthBar.value;
     }
 
     public void ActivateUI() {

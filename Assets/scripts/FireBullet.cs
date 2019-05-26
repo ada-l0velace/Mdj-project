@@ -3,20 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FireBullet : Bullet {
+
+    float modifier = 0.5f;
+    public override float GetDamageIce() => GetDamage() * (modifier + 1.0f);
+    public override float GetDamageWater() => GetDamage() * (modifier - 0.5f);
+    public override float GetDamageFire() => GetDamage() * modifier;
+    public override float GetDamageEarth() => GetDamage() * modifier;
+
     protected override void Damage(Transform enemy) {
         Enemy e = enemy.GetComponent<Enemy>();
-        float modifier = 0.5f;
+        float damageT = GetDamage() * modifier;
 
         if (e.eType == Enemy.ElementType.WATER) {
-            modifier -= 0.5f;
+            damageT = GetDamageWater();
         }
         else if (e.eType == Enemy.ElementType.ICE) {
-            modifier += 1.00f;
+            damageT = GetDamageIce();
         }
 
         if (e != null) {
             ImpactEnemyPhysics(e);
-            e.TakeDamage(damage * modifier);
+            e.TakeDamage(damageT);
         }
     }
     protected override void Explode() {

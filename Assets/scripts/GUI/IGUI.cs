@@ -4,6 +4,5 @@ using UnityEngine;
 
 public interface IGUI {
     void ActivateUI();
-
     void DeactivateUI();
 }

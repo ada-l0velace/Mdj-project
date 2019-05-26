@@ -202,6 +202,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd203dd4749194b45b07fb894d54c4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eType: 1
+  turretName: 
   turretBlueprint:
     prefab: {fileID: 8663785437465044930}
     cost: 100

@@ -24,8 +24,12 @@ public class UnitSelectionComponent : MonoBehaviour {
         if (lr != null)
             lr.enabled = false;
         selectableObject.unitSelection.enabled = false;
-        
-        
+        UnitGUI a = World.Instance.GetComponent<UnitGUI>();
+        if (a.currentUI != null) {
+            a.currentUI.DeactivateUI();
+            a.currentUI = null;
+        }
+
     }
 
     private void EnableSelection(SelectableUnitComponent selectableObject) {
@@ -34,9 +38,14 @@ public class UnitSelectionComponent : MonoBehaviour {
             lr.enabled = true;
         selectableObject.unitSelection.enabled = true;
         Enemy e = selectableObject.GetComponent<Enemy>();
+        Turret t = selectableObject.GetComponent<Turret>();
         if (e) {
             e.activateUI();
         }
+        else if(t) {
+            t.activateUI();
+        }
+
     }
     void Update() {
         // If we press the left mouse button, begin selection and remember the location of the mouse
@@ -107,11 +116,7 @@ public class UnitSelectionComponent : MonoBehaviour {
                     }
                 }
                 else {
-                    UnitGUI a = World.Instance.GetComponent<UnitGUI>();
-                    if (a.currentUI != null) {
-                        a.currentUI.DeactivateUI();
-                        a.currentUI = null;
-                    }
+                    
                     //if (World.Instance.selectedDetails)
                     //    World.Instance.GetComponent<UnitGUI>().currentUI.DeactivateUI();
                     if (selectableObject.selectionCircle != null) {

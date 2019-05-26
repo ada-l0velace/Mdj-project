@@ -5,8 +5,11 @@ public class Turret : MonoBehaviour {
 
     private Transform target;
     private Enemy targetEnemy;
-    
+
     [Header("General")]
+    public Enemy.ElementType eType;
+    public string turretName;
+    public IGUI towerGUI;
     public TurretBlueprint turretBlueprint;
     public float range = 15f;
     public bool isBuilding = true;
@@ -31,6 +34,7 @@ public class Turret : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        towerGUI = new UnitTowerGUI(this, World.Instance.towerDetails);
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
         gameObject.AddComponent<LineRenderer>();
         CreatePoints();
@@ -87,6 +91,7 @@ public class Turret : MonoBehaviour {
 
     void Shoot() {
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        
         Bullet bullet = bulletGO.GetComponent<Bullet>();
         if (bullet != null)
             bullet.Seek(target);
@@ -117,5 +122,13 @@ public class Turret : MonoBehaviour {
             line.SetPosition(i, new Vector3(Mathf.Sin(theta) * range, 0.5f, Mathf.Cos(theta) * range));
         }
 
+    }
+    public void activateUI() {
+        /*IGUI aux = World.Instance.GetComponent<UnitGUI>().currentUI;
+        if (aux != null) {
+            aux.DeactivateUI();
+        }*/
+        World.Instance.GetComponent<UnitGUI>().currentUI = towerGUI;
+        towerGUI.ActivateUI();
     }
 }

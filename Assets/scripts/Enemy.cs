@@ -16,8 +16,7 @@ public class Enemy : MonoBehaviour {
     public NavMeshAgent m_Agent;
     public float speed;
     private PIDRigidbody pid;
-   
-    public float startHealth = 100;
+    float startHealth = 200;
     public float health;
     public LineRenderer unitSelection;
     public int worth = 50; 
@@ -28,6 +27,7 @@ public class Enemy : MonoBehaviour {
 
     public void Start() {
         this.enabled = true;
+        FloatingTextController.Initialize();
         speed = startSpeed;
         health = startHealth;
         gameObject.tag = "Enemy";
@@ -89,11 +89,13 @@ public class Enemy : MonoBehaviour {
     }
 
     public void TakeDamage(float amount) {
+        //Debug.Log(health + " | " + amount + " | " + healthBar.value);
+        FloatingTextController.CreateFloatingText(amount.ToString(), transform);
         health -= amount;
-
         healthBar.value = health / startHealth;
 
         
+
         //selectedUnit.UpdateHealthBar(s, healthBar.value);
         if (health <= 0 && !isDead) {
             Die();
