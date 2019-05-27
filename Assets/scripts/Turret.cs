@@ -65,7 +65,6 @@ public class Turret : MonoBehaviour {
     }
 
     public virtual void UpdateStats(Text[] texts) {
-        Debug.Log("WTF");
         texts[3].text = name;
         texts[0].text = "Type: " + eType.ToString();
         texts[1].text = "Damage: E" + bullet.GetDamageEarth() + " F" + bullet.GetDamageFire() + " W" + bullet.GetDamageWater() + " I" + bullet.GetDamageIce();

@@ -1,0 +1,221 @@
+fileFormatVersion: 2
+guid: 2f1ce56c294b9de40aa3a8b72a072884
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Cube
+    100002: Cube_1
+    100004: Cube_10
+    100006: Cube_11
+    100008: Cube_12
+    100010: Cube_13
+    100012: Cube_13_2
+    100014: Cube_1_2
+    100016: Cube_2
+    100018: Cube_3
+    100020: Cube_4
+    100022: Cube_5
+    100024: Cube_7
+    100026: Cube_9
+    100028: Floor
+    100030: //RootNode
+    100032: Lensflare_Source
+    100034: Moon
+    100036: Moon_Light
+    100038: Muralha
+    100040: Physical_Sky
+    100042: Relva
+    100044: Shadow_Plane
+    100046: Sky_Dome
+    100048: Sky_Null
+    100050: Solo_Elevado
+    100052: Sun
+    100054: Sun_light
+    400000: Cube
+    400002: Cube_1
+    400004: Cube_10
+    400006: Cube_11
+    400008: Cube_12
+    400010: Cube_13
+    400012: Cube_13_2
+    400014: Cube_1_2
+    400016: Cube_2
+    400018: Cube_3
+    400020: Cube_4
+    400022: Cube_5
+    400024: Cube_7
+    400026: Cube_9
+    400028: Floor
+    400030: //RootNode
+    400032: Lensflare_Source
+    400034: Moon
+    400036: Moon_Light
+    400038: Muralha
+    400040: Physical_Sky
+    400042: Relva
+    400044: Shadow_Plane
+    400046: Sky_Dome
+    400048: Sky_Null
+    400050: Solo_Elevado
+    400052: Sun
+    400054: Sun_light
+    2100000: Mat
+    2100002: Relva
+    2100004: Floor_Sand
+    2300000: Cube
+    2300002: Cube_1
+    2300004: Cube_10
+    2300006: Cube_11
+    2300008: Cube_12
+    2300010: Cube_13
+    2300012: Cube_13_2
+    2300014: Cube_1_2
+    2300016: Cube_2
+    2300018: Cube_3
+    2300020: Cube_4
+    2300022: Cube_5
+    2300024: Cube_7
+    2300026: Cube_9
+    2300028: Floor
+    2300030: Relva
+    2300032: Solo_Elevado
+    3300000: Cube
+    3300002: Cube_1
+    3300004: Cube_10
+    3300006: Cube_11
+    3300008: Cube_12
+    3300010: Cube_13
+    3300012: Cube_13_2
+    3300014: Cube_1_2
+    3300016: Cube_2
+    3300018: Cube_3
+    3300020: Cube_4
+    3300022: Cube_5
+    3300024: Cube_7
+    3300026: Cube_9
+    3300028: Floor
+    3300030: Relva
+    3300032: Solo_Elevado
+    4300000: Cube_1
+    4300002: Cube
+    4300004: Cube_13
+    4300006: Cube_13_2
+    4300008: Cube_12
+    4300010: Cube_11
+    4300012: Cube_10
+    4300014: Cube_9
+    4300016: Cube_7
+    4300018: Cube_5
+    4300020: Cube_4
+    4300022: Cube_3
+    4300024: Cube_1_2
+    4300026: Cube_2
+    4300028: Relva
+    4300030: Solo_Elevado
+    4300032: Floor
+    10800000: Lensflare_Source
+    10800002: Moon_Light
+    10800004: Sky_Dome
+    10800006: Sun_light
+    11100000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Floor_Sand
+    second: {fileID: 2100000, guid: 705d20570af2d4f4790082d52e445d14, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat
+    second: {fileID: 2100000, guid: 84d83db4a040b09459afd4cc0e41cf8f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Relva
+    second: {fileID: 2100000, guid: 051f33108b0442a419dee505c7923e77, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 1
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
