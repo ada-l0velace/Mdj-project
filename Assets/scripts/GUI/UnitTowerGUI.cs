@@ -9,7 +9,6 @@ public class UnitTowerGUI : IGUI {
     public UnitTowerGUI(Turret tower, GameObject current) {
         this.tower = tower;
         this.current = current;
-        current.GetComponentsInChildren<Button>()[0].onClick.AddListener(tower.SellTurret);
         //current.GetComponentsInChildren<Button>()[1].onClick.AddListener(tower.SellTurret);
     }
 
@@ -22,7 +21,10 @@ public class UnitTowerGUI : IGUI {
         texts[3].text = tower.name;
         texts[0].text = "Type: " +  tower.eType.ToString();
         texts[1].text = "Damage: E" + bullet.GetDamageEarth() + " F" + bullet.GetDamageFire() + " W" + bullet.GetDamageWater() + " I" + bullet.GetDamageIce();
+        current.GetComponentsInChildren<Button>()[0].onClick.RemoveAllListeners();
+        current.GetComponentsInChildren<Button>()[0].onClick.AddListener(tower.SellTurret);
         current.transform.SetAsLastSibling();
+
         //texts[2].text = "Resistance: ";
     }
 
