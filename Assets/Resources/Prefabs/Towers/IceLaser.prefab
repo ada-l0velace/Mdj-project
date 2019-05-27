@@ -88,7 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 577861150361172196}
-  - component: {fileID: 577861150360773210}
+  - component: {fileID: 1428129821668078424}
   m_Layer: 0
   m_Name: IceLaser
   m_TagString: Untagged
@@ -112,7 +112,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &577861150360773210
+--- !u!114 &1428129821668078424
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 577861150360806596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd203dd4749194b45b07fb894d54c4f3, type: 3}
+  m_Script: {fileID: 11500000, guid: ed0afee2b200f15408623a31aef9d49e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   eType: 3
@@ -134,20 +134,18 @@ MonoBehaviour:
   range: 10
   isBuilding: 1
   rangeIndicatorM: {fileID: 2100000, guid: ce8ccfcaf584cd44a99e601e7dfe1c62, type: 2}
-  bulletPrefab: {fileID: 1881489165941746272, guid: c2cf6717cc24ff645b7c709c5e326150,
-    type: 3}
+  bulletPrefab: {fileID: 0}
   fireRate: 1
-  laserMaterial: {fileID: 2100000, guid: ec5aac61d7d124d40b3a08c8b88ff11b, type: 2}
-  useLaser: 1
-  laserRenderer: {fileID: 0}
-  impactEffect: {fileID: 4498862196622897891}
-  impactLight: {fileID: 4445041641285193977}
-  damageOverTime: 100
-  slowAmount: 0.5
   enemyTag: Enemy
   partToRotate: {fileID: 577861152135897406}
   turnSpeed: 10
   firePoint: {fileID: 577861150982474242}
+  laserRenderer: {fileID: 0}
+  impactEffect: {fileID: 4498862196622897891}
+  impactLight: {fileID: 4445041641285193977}
+  damageOverTime: 30
+  slowAmount: 0.5
+  laserMaterial: {fileID: 2100000, guid: 6399640289bd7124cac52ad86dbaa9d0, type: 2}
 --- !u!1 &577861150360806598
 GameObject:
   m_ObjectHideFlags: 0
