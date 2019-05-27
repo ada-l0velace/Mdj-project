@@ -18,17 +18,21 @@ public class UnitSelectionComponent : MonoBehaviour {
 
     }
     private void DisableSelection(SelectableUnitComponent selectableObject) {
-        Destroy(selectableObject.selectionCircle.gameObject);
-        selectableObject.selectionCircle = null;
-        LineRenderer lr = selectableObject.gameObject.GetComponent<LineRenderer>();
-        if (lr != null)
-            lr.enabled = false;
-        selectableObject.unitSelection.enabled = false;
-        UnitGUI a = World.Instance.GetComponent<UnitGUI>();
-        if (a.currentUI != null) {
-            a.currentUI.DeactivateUI();
-            a.currentUI = null;
+        if(!MouseInputUIBlocker.BlockedByUI) { 
+            Destroy(selectableObject.selectionCircle.gameObject);
+            selectableObject.selectionCircle = null;
+            LineRenderer lr = selectableObject.gameObject.GetComponent<LineRenderer>();
+            if (lr != null)
+                lr.enabled = false;
+            selectableObject.unitSelection.enabled = false;
+        
+            UnitGUI a = World.Instance.GetComponent<UnitGUI>();
+            if (a.currentUI != null) {
+                a.currentUI.DeactivateUI();
+                a.currentUI = null;
+            }
         }
+
 
     }
 
@@ -39,6 +43,10 @@ public class UnitSelectionComponent : MonoBehaviour {
         selectableObject.unitSelection.enabled = true;
         Enemy e = selectableObject.GetComponent<Enemy>();
         Turret t = selectableObject.GetComponent<Turret>();
+        UnitGUI a = World.Instance.GetComponent<UnitGUI>();
+        if (a.currentUI != null) {
+            a.currentUI.DeactivateUI();
+        }
         if (e) {
             e.activateUI();
         }
@@ -119,7 +127,7 @@ public class UnitSelectionComponent : MonoBehaviour {
                     
                     //if (World.Instance.selectedDetails)
                     //    World.Instance.GetComponent<UnitGUI>().currentUI.DeactivateUI();
-                    if (selectableObject.selectionCircle != null) {
+                    if (selectableObject.selectionCircle != null ) {
                         DisableSelection(selectableObject);
                     }
                 }

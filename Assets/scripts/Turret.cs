@@ -87,6 +87,16 @@ public class Turret : MonoBehaviour {
         partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
     }
 
+    public void SellTurret() {
+        Debug.Log("OMEGALUL");
+        PlayerStats.Money += turretBlueprint.GetSellAmount();
+        //GameObject effect = (GameObject)Instantiate(buildManager.sellEffect, GetBuildPosition(), Quaternion.identity);
+        //Destroy(effect, 5f);
+        towerGUI.DeactivateUI();
+        World.Instance.GetComponent<UnitGUI>().currentUI = null;
+        Destroy(this.gameObject);
+        //turretBlueprint = null;
+    }
 
 
     void Shoot() {

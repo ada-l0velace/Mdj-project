@@ -10,17 +10,17 @@ public class FloatingTextController : MonoBehaviour {
         Initialize();
     }
     public static void Initialize() {
-        canvas = GameObject.Find("Canvas");
+        if(!canvas)
+            canvas = GameObject.Find("Canvas");
         if (!popupText)
             popupText = Resources.Load<FloatingText>("Prefabs/UI/PopupTextParent");
-        Debug.Log(popupText);
     }
     public static void CreateFloatingText(string text, Transform location) {
-        FloatingText instance = Instantiate(popupText);
-        Vector2 screenPosition = Camera.main.WorldToScreenPoint(location.position);
-        instance.transform.SetParent(canvas.transform, false);
-        instance.transform.position = screenPosition;
-        instance.setText(text);
+        /*FloatingText instance =*/ ObjectPooler.Instance.SpawnFromPool("Damage").onObjectSpawn(location,text,canvas); //Instantiate(popupText);
+        //Vector2 screenPosition = Camera.main.WorldToScreenPoint(location.position);
+        //instance.transform.SetParent(canvas.transform, false);
+        //instance.transform.position = screenPosition;
+        //instance.setText(text);
     }
    
 }

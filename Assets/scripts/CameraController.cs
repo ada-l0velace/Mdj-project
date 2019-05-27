@@ -25,6 +25,8 @@ public class CameraController : MonoBehaviour {
     private bool[] isDragging = new bool[2];
     private Vector3 selectStartPosition;
     private Texture2D pixel;
+    private Vector2 currentRotation = new Vector2(0, 60);
+    public float maxYAngle = 90f;
 
     void Start() {
         setPixel(selectColor);
@@ -62,7 +64,13 @@ public class CameraController : MonoBehaviour {
         pos.z = Mathf.Clamp(pos.z, -panLimit.y, panLimit.y-20f);
         
         transform.position = pos;
-
+        if (Input.GetMouseButton(2)) {
+            currentRotation.x += Input.GetAxis("Mouse X") * 10f;
+            currentRotation.y -= Input.GetAxis("Mouse Y") * 10f;
+            currentRotation.x = Mathf.Repeat(currentRotation.x, 360);
+            currentRotation.y = Mathf.Clamp(currentRotation.y, -maxYAngle, maxYAngle);
+            Camera.main.transform.rotation = Quaternion.Euler(currentRotation.y, currentRotation.x, 0);
+        }
         //updateDragging();
     }
     private void dropSelection(Vector3 screenStart, Vector3 screenEnd) {
