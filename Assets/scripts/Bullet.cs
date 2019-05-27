@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour {
     private float speed = 70f;
     public GameObject impactEffect;
     public int damage = 50;
+
     public float explosionRadius = 0f;
 
     public void Seek(Transform _target) {
@@ -33,6 +34,16 @@ public class Bullet : MonoBehaviour {
         transform.Translate(dir.normalized * distanceThisFrame, Space.World);
         transform.LookAt(target);
     }
+
+    public float GetDamage() => damage;
+
+    public virtual float GetDamageIce() => damage;
+
+    public virtual float GetDamageFire() => damage;
+
+    public virtual float GetDamageWater() => damage;
+
+    public virtual float GetDamageEarth() => damage;
 
     protected virtual void Damage(Transform enemy) {
         Enemy e = enemy.GetComponent<Enemy>();

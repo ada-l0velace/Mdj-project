@@ -57,12 +57,13 @@ public class PlaceTower : MonoBehaviour
 
                     turret.GetComponent<SelectableUnitComponent>().unitSelection.enabled = false;
                     currTower = null;
-                    
                     if (Input.GetKey("left shift")) {
                         clicked();
                     }
+
                     grid.OcupyPosition((int)x, (int)z);
                     PlayerStats.Money -= turret.turretBlueprint.cost;
+                    
                 }
 
             }
@@ -88,7 +89,8 @@ public class PlaceTower : MonoBehaviour
             }
         }
         if (Input.GetKeyUp(KeyCode.Escape)) {
-            if(currTower != null) { 
+            if(currTower != null) {
+                currTower.GetComponent<SelectableUnitComponent>().unitSelection.enabled = false;
                 Destroy(currTower);
                 currTower = null;
             }

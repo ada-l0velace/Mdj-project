@@ -112,9 +112,9 @@ MonoBehaviour:
   moving: 0
   m_Agent: {fileID: 0}
   speed: 0
-  startHealth: 200
   health: 0
-  worth: 50
+  unitSelection: {fileID: 0}
+  worth: 25
   deathEffect: {fileID: 429406806209291631, guid: a4ba54185958838488fd726ab00eba7a,
     type: 3}
   healthBar: {fileID: 0}

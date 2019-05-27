@@ -12,6 +12,7 @@ public class SelectableUnitComponent : MonoBehaviour {
     void Start() {
         SelectionPoints();
         unitSelection.enabled = false;
+        
     }
     private void Update() {
         unitSelection.transform.position = transform.position + (Vector3.up * 0.1f);
@@ -22,7 +23,9 @@ public class SelectableUnitComponent : MonoBehaviour {
         Color c2 = Color.green;
         var segments = 360;
         GameObject g = new GameObject();
-        //g.transform.SetParent(transform);
+        Turret t = GetComponent<Turret>();
+        if(t)
+            g.transform.SetParent(transform, false);
         //g.transform.position = transform.position + (Vector3.up * 0.1f);
         unitSelection = g.AddComponent<LineRenderer>();
         unitSelection.material = new Material(Shader.Find("Sprites/Default"));

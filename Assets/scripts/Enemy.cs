@@ -14,10 +14,8 @@ public class Enemy : MonoBehaviour {
     [HideInInspector]
     public IGUI enemyGUI;
     public NavMeshAgent m_Agent;
-    public float speed;
     private PIDRigidbody pid;
-   
-    public float startHealth = 100;
+    float startHealth = 400;
     public float health;
     public LineRenderer unitSelection;
     public int worth = 50; 
@@ -28,7 +26,11 @@ public class Enemy : MonoBehaviour {
 
     public void Start() {
         this.enabled = true;
-        speed = startSpeed;
+        FloatingTextController.Initialize();
+        if (m_Agent == null) {
+            m_Agent = gameObject.AddComponent<NavMeshAgent>();
+        }
+        startSpeed = m_Agent.speed;
         health = startHealth;
         gameObject.tag = "Enemy";
         SelectableUnitComponent suc = gameObject.AddComponent<SelectableUnitComponent>();
@@ -42,8 +44,9 @@ public class Enemy : MonoBehaviour {
 
     private void Update() {
         if (!moving) {
-            if (m_Agent == null)
+            if (m_Agent == null) { 
                 m_Agent = gameObject.AddComponent<NavMeshAgent>();
+            }
             m_Agent.destination = endPosition.transform.position;
             m_Agent.updatePosition = false;
             m_Agent.updateRotation = false;
@@ -66,10 +69,13 @@ public class Enemy : MonoBehaviour {
             pid.Update(GetComponent<Rigidbody>(), desiredVelocity, desiredOrientation, Time.deltaTime);
             Rigidbody rb = GetComponent<Rigidbody>();
             m_Agent.nextPosition = transform.position;
+            m_Agent.speed = startSpeed;
         }
         //Debug.Log(Vector3.Distance(transform.position, endPosition.transform.position));
         if (Vector3.Distance(transform.position, endPosition.transform.position) <= 2.5f) {
+            int saved = PlayerStats.Money;
             Die();
+            PlayerStats.Money = saved;
             //GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
             PlayerStats.Lives--;
             //UnitSpawner.EnemiesAlive--;
@@ -79,6 +85,7 @@ public class Enemy : MonoBehaviour {
             return;
         }
         healthBar.transform.position = Camera.main.WorldToScreenPoint((Vector3.up * 0.1f) + transform.position);
+        healthBar.transform.SetAsFirstSibling();
         if (unitSelection != null) {
             unitSelection.transform.position = transform.position+ (Vector3.up * 0.1f);
         }
@@ -89,11 +96,14 @@ public class Enemy : MonoBehaviour {
     }
 
     public void TakeDamage(float amount) {
+        //Debug.Log(health + " | " + amount + " | " + healthBar.value);
+        FloatingTextController.CreateFloatingText(amount.ToString(), transform);
         health -= amount;
-
         healthBar.value = health / startHealth;
+        healthBar.transform.SetAsFirstSibling();
 
         
+
         //selectedUnit.UpdateHealthBar(s, healthBar.value);
         if (health <= 0 && !isDead) {
             Die();
@@ -101,7 +111,8 @@ public class Enemy : MonoBehaviour {
     }
 
     public void Slow(float pct) {
-        speed = startSpeed * (1f - pct);
+        if(m_Agent)
+            m_Agent.speed = startSpeed * (1f - pct);
     }
 
     void Die() {

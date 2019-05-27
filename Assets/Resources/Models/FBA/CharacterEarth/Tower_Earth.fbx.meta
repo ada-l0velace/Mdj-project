@@ -1,0 +1,213 @@
+fileFormatVersion: 2
+guid: 5316140e4dd377447b77941999cf553e
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Capsule
+    100002: Capsule_1
+    100004: Capsule_2
+    100006: Capsule_3
+    100008: Cube
+    100010: Cube_1
+    100012: Moon
+    100014: Physical_Sky
+    100016: Shadow_Plane
+    100018: Sky_Null
+    100020: Subdivision_Surface
+    100022: Subdivision_Surface_1
+    100024: Sun
+    100026: Tocha_Chama
+    100028: Tocha_Chama_1
+    100030: Tocha_Chama_2
+    100032: Tocha_Chama_3
+    100034: Tocha_Chama_4
+    100036: Tocha_Chama_5
+    100038: Tocha_Chama_6
+    100040: Tocha_Chama_7
+    100042: Torus
+    100044: //RootNode
+    400000: Capsule
+    400002: Capsule_1
+    400004: Capsule_2
+    400006: Capsule_3
+    400008: Cube
+    400010: Cube_1
+    400012: Moon
+    400014: Physical_Sky
+    400016: Shadow_Plane
+    400018: Sky_Null
+    400020: Subdivision_Surface
+    400022: Subdivision_Surface_1
+    400024: Sun
+    400026: Tocha_Chama
+    400028: Tocha_Chama_1
+    400030: Tocha_Chama_2
+    400032: Tocha_Chama_3
+    400034: Tocha_Chama_4
+    400036: Tocha_Chama_5
+    400038: Tocha_Chama_6
+    400040: Tocha_Chama_7
+    400042: Torus
+    400044: //RootNode
+    2100000: Ring_Earth
+    2100002: Mat
+    2100004: Mat.1
+    2100006: Eyes_Acess_Earth
+    2100008: Mat.6
+    2300000: Capsule
+    2300002: Capsule_1
+    2300004: Capsule_2
+    2300006: Capsule_3
+    2300008: Cube
+    2300010: Cube_1
+    2300012: Tocha_Chama
+    2300014: Tocha_Chama_1
+    2300016: Tocha_Chama_2
+    2300018: Tocha_Chama_3
+    2300020: Tocha_Chama_4
+    2300022: Tocha_Chama_5
+    2300024: Tocha_Chama_6
+    2300026: Tocha_Chama_7
+    2300028: Torus
+    3300000: Capsule
+    3300002: Capsule_1
+    3300004: Capsule_2
+    3300006: Capsule_3
+    3300008: Cube
+    3300010: Cube_1
+    3300012: Tocha_Chama
+    3300014: Tocha_Chama_1
+    3300016: Tocha_Chama_2
+    3300018: Tocha_Chama_3
+    3300020: Tocha_Chama_4
+    3300022: Tocha_Chama_5
+    3300024: Tocha_Chama_6
+    3300026: Tocha_Chama_7
+    3300028: Torus
+    4300000: Capsule_3
+    4300002: Capsule_2
+    4300004: Capsule_1
+    4300006: Capsule
+    4300008: Torus
+    4300010: Tocha_Chama_7
+    4300012: Tocha_Chama_6
+    4300014: Tocha_Chama_5
+    4300016: Tocha_Chama_4
+    4300018: Tocha_Chama_3
+    4300020: Tocha_Chama_2
+    4300022: Tocha_Chama_1
+    4300024: Tocha_Chama
+    4300026: Cube
+    4300028: Cube_1
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eyes_Acess_Earth
+    second: {fileID: 2100000, guid: 6e16ec6b6b4ec2f4086908e2b7989763, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat
+    second: {fileID: 2100000, guid: 721cfab4f5d19b04cbb3c08c35e922ec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.1
+    second: {fileID: 2100000, guid: 4482b194bad6567408372c77d93a9fb2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.6
+    second: {fileID: 2100000, guid: f70cabe249dc63e4fb1b23ec8447981d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ring_Earth
+    second: {fileID: 2100000, guid: c7fdf29c0b2bd1b448e4c0892a959744, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 2
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

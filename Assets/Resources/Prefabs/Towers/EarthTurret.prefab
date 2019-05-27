@@ -202,6 +202,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd203dd4749194b45b07fb894d54c4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eType: 2
+  turretName: 
   turretBlueprint:
     prefab: {fileID: 8663785437465044930}
     cost: 100
@@ -209,7 +211,6 @@ MonoBehaviour:
     upgradeCost: 200
   range: 8
   isBuilding: 1
-  unitSelection: {fileID: 0}
   rangeIndicatorM: {fileID: 2100000, guid: ce8ccfcaf584cd44a99e601e7dfe1c62, type: 2}
   bulletPrefab: {fileID: 5630621071608864672, guid: 7f144bdc02117754fa114f072838b4bc,
     type: 3}

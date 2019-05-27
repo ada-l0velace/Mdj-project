@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour {
     public Text MoneyGUI;
 
     public static int Money;
-    public int startMoney = 100;
+    public int startMoney;
 
     public static int Lives;
     public int startLives = 5;

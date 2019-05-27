@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class Turret : MonoBehaviour {
 
-    private Transform target;
-    private Enemy targetEnemy;
-    
+    protected Transform target;
+    protected Enemy targetEnemy;
+
     [Header("General")]
+    public Enemy.ElementType eType;
+    public string turretName;
+    public IGUI towerGUI;
     public TurretBlueprint turretBlueprint;
     public float range = 15f;
     public bool isBuilding = true;
@@ -17,23 +22,23 @@ public class Turret : MonoBehaviour {
     public float fireRate = 1f;
     private float fireCountdown = 0f;
 
-    public ParticleSystem impactEffect;
-
-
     [Header("Unity Setup Fields")]
-
     public string enemyTag = "Enemy";
-
     public Transform partToRotate;
     public float turnSpeed = 10f;
-
     public Transform firePoint;
 
+    [HideInInspector]
+    public Bullet bullet;
+
     // Use this for initialization
-    void Start() {
+    protected void Start() {
+        towerGUI = new UnitTowerGUI(this, World.Instance.towerDetails);
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
         gameObject.AddComponent<LineRenderer>();
-        CreatePoints();
+        if(bulletPrefab)
+            bullet = bulletPrefab.GetComponent<Bullet>();
+        CreateRangeIndicator();
     }
 
     void UpdateTarget() {
@@ -59,47 +64,54 @@ public class Turret : MonoBehaviour {
 
     }
 
+    public virtual void UpdateStats(Text[] texts) {
+        Debug.Log("WTF");
+        texts[3].text = name;
+        texts[0].text = "Type: " + eType.ToString();
+        texts[1].text = "Damage: E" + bullet.GetDamageEarth() + " F" + bullet.GetDamageFire() + " W" + bullet.GetDamageWater() + " I" + bullet.GetDamageIce();
+        
+    }
+
     // Update is called once per frame
-    void Update() {
+    protected void Update() {
         if (!isBuilding) { 
             if (target == null) {
                 return;
             }
-
-            LockOnTarget();
-            if (fireCountdown <= 0f) {
-                Shoot();
-                fireCountdown = 1f / fireRate;
-            }
-
+        LockOnTarget();
+        if (fireCountdown <= 0f) {
+            Shoot();
+            fireCountdown = 1f / fireRate;
+        }
             fireCountdown -= Time.deltaTime;
         }
     }
 
-    void LockOnTarget() {
+    protected void LockOnTarget() {
         Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
         partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
     }
 
+    public void SellTurret() {
+        PlayerStats.Money += turretBlueprint.GetSellAmount();
+        towerGUI.DeactivateUI();
+        World.Instance.GetComponent<UnitGUI>().currentUI = null;
+
+        DestroyImmediate(this.gameObject);
+    }
 
 
     void Shoot() {
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        
         Bullet bullet = bulletGO.GetComponent<Bullet>();
         if (bullet != null)
             bullet.Seek(target);
     }
 
-    void OnDrawGizmosSelected() {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, range);
-    }
-
-   
-
-    void CreatePoints() {
+    void CreateRangeIndicator() {
         var segments = 360;
         var line = GetComponent<LineRenderer>();
         line.useWorldSpace = false;
@@ -117,5 +129,10 @@ public class Turret : MonoBehaviour {
             line.SetPosition(i, new Vector3(Mathf.Sin(theta) * range, 0.5f, Mathf.Cos(theta) * range));
         }
 
+    }
+
+    public void activateUI() {
+        World.Instance.GetComponent<UnitGUI>().currentUI = towerGUI;
+        towerGUI.ActivateUI();
     }
 }
