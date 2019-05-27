@@ -2913,7 +2913,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildTower: 0
   button: {fileID: 221088894}
-  tower: {fileID: 8663785437465044930, guid: 87285f0a457039f41bbddaace84da680, type: 3}
+  tower: {fileID: 577861150360806596, guid: 471c7e4beece37c45b0c35b39dc2ea18, type: 3}
 --- !u!114 &1226617247
 MonoBehaviour:
   m_ObjectHideFlags: 0

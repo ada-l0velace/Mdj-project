@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Turret : MonoBehaviour {
 
@@ -19,8 +20,18 @@ public class Turret : MonoBehaviour {
     public GameObject bulletPrefab;
     public float fireRate = 1f;
     private float fireCountdown = 0f;
+    public Material laserMaterial;
 
+    
+
+    [Header("Use Laser (default)")]
+    public bool useLaser = false;
+    public LineRenderer laserRenderer;
     public ParticleSystem impactEffect;
+    public Light impactLight;
+
+    public int damageOverTime = 30;
+    public float slowAmount = .5f;
 
 
     [Header("Unity Setup Fields")]
@@ -37,7 +48,11 @@ public class Turret : MonoBehaviour {
         towerGUI = new UnitTowerGUI(this, World.Instance.towerDetails);
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
         gameObject.AddComponent<LineRenderer>();
-        CreatePoints();
+        CreateRangeIndicator();
+        CreateLaserBeam();
+        impactEffect.Stop();
+        if(impactLight)
+            impactLight.enabled = false;
     }
 
     void UpdateTarget() {
@@ -67,17 +82,44 @@ public class Turret : MonoBehaviour {
     void Update() {
         if (!isBuilding) { 
             if (target == null) {
+                if(useLaser && laserRenderer.enabled) {
+                    laserRenderer.enabled = false;
+                    impactEffect.Stop();
+                    impactLight.enabled = false;
+                }
                 return;
             }
 
             LockOnTarget();
-            if (fireCountdown <= 0f) {
-                Shoot();
-                fireCountdown = 1f / fireRate;
+            if (useLaser) {
+                Laser();
             }
-
-            fireCountdown -= Time.deltaTime;
+            else { 
+                if (fireCountdown <= 0f) {
+                    Shoot();
+                    fireCountdown = 1f / fireRate;
+                }
+                fireCountdown -= Time.deltaTime;
+            }
         }
+    }
+
+    void Laser() {
+        targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
+        targetEnemy.Slow(slowAmount);
+        if (!laserRenderer.enabled) {
+            laserRenderer.enabled = true;
+            impactEffect.Play();
+            impactLight.enabled = true;
+        }
+        laserRenderer.SetPosition(0, firePoint.position);
+        if (target == null)
+            return;
+        laserRenderer.SetPosition(1, target.position);
+        Vector3 direction = firePoint.position - target.position;
+
+        impactEffect.transform.position = target.position + direction.normalized;
+        impactEffect.transform.rotation = Quaternion.LookRotation(direction);
     }
 
     void LockOnTarget() {
@@ -94,7 +136,8 @@ public class Turret : MonoBehaviour {
         //Destroy(effect, 5f);
         towerGUI.DeactivateUI();
         World.Instance.GetComponent<UnitGUI>().currentUI = null;
-        Destroy(this.gameObject);
+
+        DestroyImmediate(this.gameObject);
         //turretBlueprint = null;
     }
 
@@ -114,7 +157,7 @@ public class Turret : MonoBehaviour {
 
    
 
-    void CreatePoints() {
+    void CreateRangeIndicator() {
         var segments = 360;
         var line = GetComponent<LineRenderer>();
         line.useWorldSpace = false;
@@ -133,6 +176,23 @@ public class Turret : MonoBehaviour {
         }
 
     }
+
+    void CreateLaserBeam() {
+        GameObject g = new GameObject();
+        g.transform.SetParent(transform, false);
+        //var segments = 360;
+        laserRenderer = g.AddComponent<LineRenderer>();
+        laserRenderer.material = laserMaterial;
+        laserRenderer.startColor = new Color(70, 130, 180);
+        laserRenderer.endColor = new Color(240, 248, 255);
+        laserRenderer.startWidth = 0.3f;
+        laserRenderer.endWidth = 0.3f;
+        laserRenderer.positionCount = 2;
+        //laserRenderer.SetPosition(0, new Vector3(0,3,0));
+        //laserRenderer.SetPosition(0, new Vector3(0, 3, 5));
+    }
+
+
     public void activateUI() {
         /*IGUI aux = World.Instance.GetComponent<UnitGUI>().currentUI;
         if (aux != null) {

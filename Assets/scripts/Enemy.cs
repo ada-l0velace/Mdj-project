@@ -14,7 +14,6 @@ public class Enemy : MonoBehaviour {
     [HideInInspector]
     public IGUI enemyGUI;
     public NavMeshAgent m_Agent;
-    public float speed;
     private PIDRigidbody pid;
     float startHealth = 400;
     public float health;
@@ -28,7 +27,10 @@ public class Enemy : MonoBehaviour {
     public void Start() {
         this.enabled = true;
         FloatingTextController.Initialize();
-        speed = startSpeed;
+        if (m_Agent == null) {
+            m_Agent = gameObject.AddComponent<NavMeshAgent>();
+        }
+        startSpeed = m_Agent.speed;
         health = startHealth;
         gameObject.tag = "Enemy";
         SelectableUnitComponent suc = gameObject.AddComponent<SelectableUnitComponent>();
@@ -67,6 +69,7 @@ public class Enemy : MonoBehaviour {
             pid.Update(GetComponent<Rigidbody>(), desiredVelocity, desiredOrientation, Time.deltaTime);
             Rigidbody rb = GetComponent<Rigidbody>();
             m_Agent.nextPosition = transform.position;
+            m_Agent.speed = startSpeed;
         }
         //Debug.Log(Vector3.Distance(transform.position, endPosition.transform.position));
         if (Vector3.Distance(transform.position, endPosition.transform.position) <= 2.5f) {
@@ -108,7 +111,8 @@ public class Enemy : MonoBehaviour {
     }
 
     public void Slow(float pct) {
-        speed = startSpeed * (1f - pct);
+        if(m_Agent)
+            m_Agent.speed = startSpeed * (1f - pct);
     }
 
     void Die() {
