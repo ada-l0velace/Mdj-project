@@ -71,7 +71,7 @@ public class Bullet : MonoBehaviour {
             Vector3 force = transform.TransformDirection(new Vector3(0, 0, 1));
             force = new Vector3(force.x, .2f, force.z).normalized;
 
-            force *= 3f;
+            force *= 10f;
             rb.AddForceAtPosition(force, transform.position, ForceMode.Impulse);
 
             float disturb = 2;
