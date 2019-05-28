@@ -111,6 +111,7 @@ MonoBehaviour:
   canvas: {fileID: 0}
   moving: 0
   m_Agent: {fileID: 0}
+  startHealth: 300
   health: 0
   unitSelection: {fileID: 0}
   worth: 25

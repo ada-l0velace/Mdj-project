@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour {
     public IGUI enemyGUI;
     public NavMeshAgent m_Agent;
     private PIDRigidbody pid;
-    float startHealth = 400;
+    public float startHealth = 400;
     public float health;
     public LineRenderer unitSelection;
     public int worth = 50;
