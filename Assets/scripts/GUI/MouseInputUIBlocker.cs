@@ -25,7 +25,7 @@ public class MouseInputUIBlocker : MonoBehaviour {
 
     public void EnterUI(BaseEventData eventData) {
         //Debug.Log(eventData.ToString());
-        if (eventData.ToString().Contains("BottomUI")) {
+        if (!eventData.ToString().Contains("healthBar")) {
             BlockedByUI = true;
         }
     }
