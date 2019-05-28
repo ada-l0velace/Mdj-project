@@ -140,10 +140,11 @@ MonoBehaviour:
   partToRotate: {fileID: 577861152135897406}
   turnSpeed: 10
   firePoint: {fileID: 577861150982474242}
+  bullet: {fileID: 0}
   laserRenderer: {fileID: 0}
   impactEffect: {fileID: 4498862196622897891}
   impactLight: {fileID: 4445041641285193977}
-  damageOverTime: 30
+  damageOverTime: 100
   slowAmount: 0.5
   laserMaterial: {fileID: 2100000, guid: 6399640289bd7124cac52ad86dbaa9d0, type: 2}
 --- !u!1 &577861150360806598

@@ -65,9 +65,9 @@ public class Turret : MonoBehaviour {
     }
 
     public virtual void UpdateStats(Text[] texts) {
-        texts[3].text = name;
+        texts[3].text = name.Replace("(Clone)", "");
         texts[0].text = "Type: " + eType.ToString();
-        texts[1].text = "Damage: E" + bullet.GetDamageEarth() + " F" + bullet.GetDamageFire() + " W" + bullet.GetDamageWater() + " I" + bullet.GetDamageIce();
+        texts[1].text = "Damage: \nEarth " + bullet.GetDamageEarth() + "\nFire " + bullet.GetDamageFire() + "\nWater " + bullet.GetDamageWater() + "\nIce " + bullet.GetDamageIce();
         
     }
 
@@ -104,7 +104,6 @@ public class Turret : MonoBehaviour {
 
     void Shoot() {
         GameObject bulletGO = (GameObject)Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        
         Bullet bullet = bulletGO.GetComponent<Bullet>();
         if (bullet != null)
             bullet.Seek(target);

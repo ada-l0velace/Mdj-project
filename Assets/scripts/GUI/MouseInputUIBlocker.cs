@@ -24,7 +24,8 @@ public class MouseInputUIBlocker : MonoBehaviour {
     }
 
     public void EnterUI(BaseEventData eventData) {
-        if (eventData.ToString().Contains("TowerDetails")) {
+        //Debug.Log(eventData.ToString());
+        if (eventData.ToString().Contains("BottomUI")) {
             BlockedByUI = true;
         }
     }

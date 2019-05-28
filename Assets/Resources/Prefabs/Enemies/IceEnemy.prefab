@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4254230049905458752}
   m_Layer: 0
   m_Name: IceEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +111,6 @@ MonoBehaviour:
   canvas: {fileID: 0}
   moving: 0
   m_Agent: {fileID: 0}
-  speed: 0
   health: 0
   unitSelection: {fileID: 0}
   worth: 25

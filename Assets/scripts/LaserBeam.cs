@@ -11,7 +11,7 @@ public class LaserBeam : Turret {
     public int damageOverTime = 30;
     public float slowAmount = .5f;
     public Material laserMaterial;
-
+    bool slowing =false;
     protected new void Start() {
         base.Start();
         CreateLaserBeam();
@@ -66,9 +66,9 @@ public class LaserBeam : Turret {
     }
 
     public override void UpdateStats(Text[] texts) {
-        texts[3].text = name;
+        texts[3].text = name.Replace("(Clone)", "");
         texts[0].text = "Type: " + eType.ToString();
-        texts[1].text = "Damage over time: "+ damageOverTime ;
+        texts[1].text = "Damage over time:\n "+ damageOverTime ;
         texts[2].text = "Slows Enemies";
     }
 

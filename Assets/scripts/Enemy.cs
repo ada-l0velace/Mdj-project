@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour {
     float startHealth = 400;
     public float health;
     public LineRenderer unitSelection;
-    public int worth = 50; 
+    public int worth = 50;
     public GameObject deathEffect;
     [Header("Unity Stuff")]
     public Slider healthBar;
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour {
 
     private void Update() {
         if (!moving) {
-            if (m_Agent == null) { 
+            if (m_Agent == null) {
                 m_Agent = gameObject.AddComponent<NavMeshAgent>();
             }
             m_Agent.destination = endPosition.transform.position;
@@ -62,8 +62,7 @@ public class Enemy : MonoBehaviour {
 
             moving = true;
         }
-        if (moving)
-        {
+        if (moving) {
             Vector3 desiredVelocity = m_Agent.desiredVelocity;
             Vector3 desiredOrientation = Quaternion.LookRotation(desiredVelocity, Vector3.up).eulerAngles;
             pid.Update(GetComponent<Rigidbody>(), desiredVelocity, desiredOrientation, Time.deltaTime);
@@ -87,7 +86,7 @@ public class Enemy : MonoBehaviour {
         healthBar.transform.position = Camera.main.WorldToScreenPoint((Vector3.up * 0.1f) + transform.position);
         healthBar.transform.SetAsFirstSibling();
         if (unitSelection != null) {
-            unitSelection.transform.position = transform.position+ (Vector3.up * 0.1f);
+            unitSelection.transform.position = transform.position + (Vector3.up * 0.1f);
         }
         else {
             unitSelection = gameObject.GetComponent<SelectableUnitComponent>().unitSelection;
@@ -102,7 +101,7 @@ public class Enemy : MonoBehaviour {
         healthBar.value = health / startHealth;
         healthBar.transform.SetAsFirstSibling();
 
-        
+
 
         //selectedUnit.UpdateHealthBar(s, healthBar.value);
         if (health <= 0 && !isDead) {
@@ -111,7 +110,7 @@ public class Enemy : MonoBehaviour {
     }
 
     public void Slow(float pct) {
-        if(m_Agent)
+        if (m_Agent)
             m_Agent.speed = startSpeed * (1f - pct);
     }
 
@@ -126,7 +125,7 @@ public class Enemy : MonoBehaviour {
         DestroyImmediate(healthBar.gameObject);
         UnitSpawner.EnemiesAlive--;
         UnitGUI a = World.Instance.GetComponent<UnitGUI>();
-        if(a.currentUI != null && a.currentUI.GetHashCode() == enemyGUI.GetHashCode())
+        if (a.currentUI != null && a.currentUI.GetHashCode() == enemyGUI.GetHashCode())
             a.currentUI = null;
         enemyGUI.DeactivateUI();
         DestroyImmediate(unitSelection.gameObject);

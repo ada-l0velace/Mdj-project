@@ -1,0 +1,186 @@
+fileFormatVersion: 2
+guid: f7ac1cbc485bbd5498b59be5bcbf6574
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Capa
+    100002: Chara
+    100004: Chara_1
+    100006: //RootNode
+    100008: Coroa
+    100010: Eyes
+    100012: Moon
+    100014: Oil_Tank
+    100016: Pendant
+    100018: Pendant_2
+    100020: Physical_Sky
+    100022: Ring_Ice
+    100024: Shadow_Plane
+    100026: Sky_Null
+    100028: Sphere
+    100030: Sphere_1
+    100032: Sphere_2
+    100034: Sphere_3
+    100036: Sphere_4
+    100038: Sphere_5
+    100040: Sun
+    400000: Capa
+    400002: Chara
+    400004: Chara_1
+    400006: //RootNode
+    400008: Coroa
+    400010: Eyes
+    400012: Moon
+    400014: Oil_Tank
+    400016: Pendant
+    400018: Pendant_2
+    400020: Physical_Sky
+    400022: Ring_Ice
+    400024: Shadow_Plane
+    400026: Sky_Null
+    400028: Sphere
+    400030: Sphere_1
+    400032: Sphere_2
+    400034: Sphere_3
+    400036: Sphere_4
+    400038: Sphere_5
+    400040: Sun
+    2100000: Chara
+    2300000: Capa
+    2300002: Chara_1
+    2300004: Eyes
+    2300006: Oil_Tank
+    2300008: Pendant_2
+    2300010: Ring_Ice
+    2300012: Sphere
+    2300014: Sphere_1
+    2300016: Sphere_2
+    2300018: Sphere_3
+    2300020: Sphere_4
+    2300022: Sphere_5
+    3300000: Capa
+    3300002: Chara_1
+    3300004: Eyes
+    3300006: Oil_Tank
+    3300008: Pendant_2
+    3300010: Ring_Ice
+    3300012: Sphere
+    3300014: Sphere_1
+    3300016: Sphere_2
+    3300018: Sphere_3
+    3300020: Sphere_4
+    3300022: Sphere_5
+    4300000: Eyes
+    4300002: Ring_Ice
+    4300004: Sphere_5
+    4300006: Sphere_4
+    4300008: Sphere_3
+    4300010: Sphere_2
+    4300012: Sphere_1
+    4300014: Sphere
+    4300016: Oil_Tank
+    4300018: Pendant_2
+    4300020: Capa
+    4300022: Chara_1
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chara
+    second: {fileID: 2100000, guid: e92f0272b2a4e7d40afa37b8bda1588b, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: EyesSurface_Color
+    second: {fileID: 2800000, guid: 6b892c5151e67cf4386189f7f8c282d7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: ice_2_material
+    second: {fileID: 2800000, guid: 602ea59a219d32642a8dc2a93cdacf15, type: 3}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
