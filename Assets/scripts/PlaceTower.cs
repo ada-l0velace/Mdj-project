@@ -47,7 +47,6 @@ public class PlaceTower : MonoBehaviour
                 GridMap grid = World.Instance.grid;
                 Turret turret = currTower.GetComponent<Turret>();
                 bool canBuy = turret.turretBlueprint.cost <= PlayerStats.Money;
-                
                 if (hit.collider.tag == "PlacebleObject" && grid.IsBuildable((int)x,(int)z) && y >= 8 && canBuy) {
                     
                     Vector3 n = new Vector3(x, y, z);

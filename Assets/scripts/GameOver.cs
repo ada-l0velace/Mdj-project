@@ -15,9 +15,7 @@ public class GameOver : MonoBehaviour {
 		sceneFader.FadeTo(menuSceneName);
     }
     private void Update() {
-        if (PlayerStats.Lives == 0)
-            if (Input.GetKey("r"))
-                Retry(); 
+
     }
 
 }
