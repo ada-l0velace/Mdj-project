@@ -25,7 +25,7 @@ public class MouseInputUIBlocker : MonoBehaviour {
 
     public void EnterUI(BaseEventData eventData) {
         var dataEvent = eventData as PointerEventData;
-        Debug.Log(dataEvent.pointerEnter.name);
+        //Debug.Log("Enter: "+dataEvent.pointerEnter.name+ " "+ System.DateTime.UtcNow.ToString());
         if (dataEvent.pointerEnter.tag == "BlockUIClick") {
             BlockedByUI = true;
         }
