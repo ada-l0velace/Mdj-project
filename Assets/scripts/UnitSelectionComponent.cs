@@ -67,6 +67,7 @@ public class UnitSelectionComponent : MonoBehaviour {
                 }
             }
         }
+
         // If we let go of the left mouse button, end selection
         if (Input.GetMouseButtonUp(0)) {
             var selectedObjects = new List<SelectableUnitComponent>();
