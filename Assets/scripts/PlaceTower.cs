@@ -3,23 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlaceTower : MonoBehaviour
-{
+public class PlaceTower : MonoBehaviour {
+
+    [System.Serializable]
+    public class TowerButton {
+        public GameObject prefab;
+        public Sprite image;
+    }
+
+    public GameObject slot;
+    public GameObject panel;
+
+    public List<TowerButton> towerPrefabs;
     public bool buildTower;
-    public Button button;
-    public GameObject tower;
+    //public Button button;
+    //public GameObject tower;
     private GameObject currTower;
     private Vector3 currentPos;
+    private int currentIndex;
     private float gridSize = 1.0f;
     // Start is called before the first frame update
     void Start() {
         currentPos = new Vector3(0,0,0);
-        button.onClick.AddListener(this.clicked);
+        //button.onClick.AddListener(this.clicked);
+        int j = 0;
+        foreach (TowerButton item in towerPrefabs) {
+            
+            GameObject newSlot = Instantiate<GameObject>(slot, panel.transform);
+            newSlot.name = j.ToString();
+            Image[] images = newSlot.GetComponentsInChildren<Image>();
+            //Button button = newSlot.GetComponentInChildren<Button>();
+            
+            foreach (Image img in images) {
+                if (img.gameObject.name == "icon") { 
+                    img.sprite = item.image;
+                    Button button = img.transform.parent.GetComponent<Button>();
+                    int index = j++;
+                    button.onClick.AddListener(() => { Clicked(index);});
+                    break;
+                }
+            }
+        }
     }
 
-    void clicked() {
+    void Clicked(int buttonId) {
+        GameObject tower = towerPrefabs[buttonId].prefab;
         bool canBuy = tower.GetComponent<Turret>().turretBlueprint.cost <= PlayerStats.Money;
         if (canBuy) {
+            currentIndex = buttonId;
             if (currTower && buildTower) {
                 DestroyImmediate(currTower);
             }
@@ -30,11 +61,6 @@ public class PlaceTower : MonoBehaviour
             currTower = e;
             currentPos.y = transform.position.y;
         }
-        //e.transform.SetParent(gameObject.transform);
-        //e.transform.localPosition = new Vector3(Input.mousePosition.x, 1, Input.mousePosition.z);
-        /*
-        count++;
-        Debug.Log("Count: " + count);*/
     }
 
     // Update is called once per frame
@@ -61,7 +87,7 @@ public class PlaceTower : MonoBehaviour
                     currTower = null;
                     buildTower = false;
                     if (Input.GetKey("left shift")) {
-                        clicked();
+                        Clicked(currentIndex);
                     }
 
                     grid.OcupyPosition((int)x, (int)z);
