@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour {
     [Header("Unity Stuff")]
     public Slider healthBar;
     private bool isDead = false;
+    public bool isSlowed = false;
 
     public void Start() {
         this.enabled = true;
@@ -68,7 +69,9 @@ public class Enemy : MonoBehaviour {
             pid.Update(GetComponent<Rigidbody>(), desiredVelocity, desiredOrientation, Time.deltaTime);
             Rigidbody rb = GetComponent<Rigidbody>();
             m_Agent.nextPosition = transform.position;
-            m_Agent.speed = startSpeed;
+            if (!isSlowed)
+                m_Agent.speed = startSpeed;
+            isSlowed = false;
         }
         //Debug.Log(Vector3.Distance(transform.position, endPosition.transform.position));
         if (Vector3.Distance(transform.position, endPosition.transform.position) <= 2.5f) {
@@ -110,8 +113,10 @@ public class Enemy : MonoBehaviour {
     }
 
     public void Slow(float pct) {
-        if (m_Agent)
+        if (m_Agent) { 
             m_Agent.speed = startSpeed * (1f - pct);
+            isSlowed = true;
+        }
     }
 
     void Die() {

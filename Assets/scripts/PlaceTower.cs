@@ -19,7 +19,10 @@ public class PlaceTower : MonoBehaviour
 
     void clicked() {
         bool canBuy = tower.GetComponent<Turret>().turretBlueprint.cost <= PlayerStats.Money;
-        if (canBuy) { 
+        if (canBuy) {
+            if (currTower && buildTower) {
+                DestroyImmediate(currTower);
+            }
             buildTower = true;
             GameObject e = (GameObject) Instantiate(tower);
             e.AddComponent<SelectableUnitComponent>();
@@ -47,7 +50,7 @@ public class PlaceTower : MonoBehaviour
                 GridMap grid = World.Instance.grid;
                 Turret turret = currTower.GetComponent<Turret>();
                 bool canBuy = turret.turretBlueprint.cost <= PlayerStats.Money;
-                if (hit.collider.tag == "PlacebleObject" && grid.IsBuildable((int)x,(int)z) && y >= 8 && canBuy) {
+                if (!MouseInputUIBlocker.BlockedByUI && hit.collider.tag == "PlacebleObject" && grid.IsBuildable((int)x,(int)z) && y >= 8 && canBuy) {
                     
                     Vector3 n = new Vector3(x, y, z);
                     currTower.transform.position = n;
@@ -56,6 +59,7 @@ public class PlaceTower : MonoBehaviour
 
                     turret.GetComponent<SelectableUnitComponent>().unitSelection.enabled = false;
                     currTower = null;
+                    buildTower = false;
                     if (Input.GetKey("left shift")) {
                         clicked();
                     }

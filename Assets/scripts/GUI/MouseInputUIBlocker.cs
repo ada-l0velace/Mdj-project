@@ -29,6 +29,9 @@ public class MouseInputUIBlocker : MonoBehaviour {
         if (dataEvent.pointerEnter.tag == "BlockUIClick") {
             BlockedByUI = true;
         }
+        else {
+            BlockedByUI = false;
+        }
     }
     public void ExitUI(BaseEventData eventData) {
         BlockedByUI = false;

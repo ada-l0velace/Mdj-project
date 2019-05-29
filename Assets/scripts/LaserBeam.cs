@@ -12,16 +12,19 @@ public class LaserBeam : Turret {
     public float slowAmount = .5f;
     public Material laserMaterial;
     bool slowing =false;
+    float modifier = 0.5f;
     protected new void Start() {
         base.Start();
         CreateLaserBeam();
         impactEffect.Stop();
         if (impactLight)
             impactLight.enabled = false;
+
     }
 
     protected new void Update() {
         if (!isBuilding) {
+            
             if (target == null) {
                 if (laserRenderer.enabled) {
                     laserRenderer.enabled = false;
@@ -30,14 +33,36 @@ public class LaserBeam : Turret {
                 }
                 return;
             }
-            LockOnTarget();
-            Laser();
+            else { 
+                LockOnTarget();
+                Laser();
+            }
+        }
+    }
+
+    public float GetDamageIce() => damageOverTime * (modifier / 2);
+    public float GetDamageWater() => damageOverTime * (modifier * 2);
+
+    void AttackEnemy(Enemy e) {
+        float damageT = damageOverTime * modifier;
+        if (e.eType == Enemy.ElementType.ICE) {
+            damageT = GetDamageIce();
+        }
+        else if (e.eType == Enemy.ElementType.WATER) {
+            damageT = GetDamageWater();
+        }
+
+        if (e != null) {
+            //ImpactEnemyPhysics(e);
+            e.TakeDamage(damageT * Time.deltaTime);
+            e.Slow(slowAmount);
         }
     }
 
     void Laser() {
-        targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
-        targetEnemy.Slow(slowAmount);
+        //targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
+        AttackEnemy(targetEnemy);
+        
         if (!laserRenderer.enabled) {
             laserRenderer.enabled = true;
             impactEffect.Play();

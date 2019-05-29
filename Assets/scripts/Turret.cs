@@ -77,11 +77,11 @@ public class Turret : MonoBehaviour {
             if (target == null) {
                 return;
             }
-        LockOnTarget();
-        if (fireCountdown <= 0f) {
-            Shoot();
-            fireCountdown = 1f / fireRate;
-        }
+            LockOnTarget();
+            if (fireCountdown <= 0f) {
+                Shoot();
+                fireCountdown = 1f / fireRate;
+            }
             fireCountdown -= Time.deltaTime;
         }
     }
@@ -94,7 +94,8 @@ public class Turret : MonoBehaviour {
     }
 
     public void SellTurret() {
-        PlayerStats.Money += turretBlueprint.GetSellAmount();
+        if(!isBuilding)
+            PlayerStats.Money += turretBlueprint.GetSellAmount();
         towerGUI.DeactivateUI();
         World.Instance.GetComponent<UnitGUI>().currentUI = null;
 

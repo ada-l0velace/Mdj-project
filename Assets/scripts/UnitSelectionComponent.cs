@@ -60,41 +60,16 @@ public class UnitSelectionComponent : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)) {
             isSelecting = true;
             mousePosition1 = Input.mousePosition;
-
-            foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
-                if (selectableObject.selectionCircle != null) {
-                    DisableSelection(selectableObject);
-                }
-            }
         }
 
         // If we let go of the left mouse button, end selection
         if (Input.GetMouseButtonUp(0)) {
-            var selectedObjects = new List<SelectableUnitComponent>();
-            foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
-                if (IsWithinSelectionBounds(selectableObject.gameObject)) {
-                    selectedObjects.Add(selectableObject);
-                }
-            }
-
-            var sb = new StringBuilder();
-            sb.AppendLine(string.Format("Selecting [{0}] Units", selectedObjects.Count));
-            foreach (var selectedObject in selectedObjects) {
-                EnableSelection(selectedObject);
-                sb.AppendLine("-> " + selectedObject.gameObject.name);
-            }
-            Debug.Log(sb.ToString());
-            
             isSelecting = false;
         }
 
-        // right click
+        // right click (needs fixing not really a good way to do this)
         if (Input.GetMouseButtonDown(1)) {
-            foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
-                if (selectableObject.selectionCircle != null) {
-                    DisableSelection(selectableObject);
-                }
-            }
+            DeselectAll();
             Boolean b = false;
             foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
                 if (IsWithinBounds(selectableObject.gameObject) && !b) {
@@ -117,21 +92,19 @@ public class UnitSelectionComponent : MonoBehaviour {
                     if (selectableObject.selectionCircle == null) {
                         selectableObject.selectionCircle = Instantiate(selectionCirclePrefab);
                         EnableSelection(selectableObject);
-                        /*selectableObject.selectionCircle.transform.SetParent(selectableObject.transform, false);
-                        selectableObject.selectionCircle.transform.eulerAngles = new Vector3(90, 0, 0);
-                        Projector p = selectableObject.selectionCircle.GetComponent<Projector>();
-                        p.farClipPlane = 2;*/
-                        //Debug.Log(p.farClipPlane);
                     }
                 }
-                else {
-                    
-                    //if (World.Instance.selectedDetails)
-                    //    World.Instance.GetComponent<UnitGUI>().currentUI.DeactivateUI();
-                    if (selectableObject.selectionCircle != null ) {
+                else if (selectableObject.selectionCircle != null ) {
                         DisableSelection(selectableObject);
-                    }
                 }
+            }
+        }
+    }
+
+    public void DeselectAll() {
+        foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
+            if (selectableObject.selectionCircle != null) {
+                DisableSelection(selectableObject);
             }
         }
     }

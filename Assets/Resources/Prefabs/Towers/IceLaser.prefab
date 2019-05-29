@@ -300,6 +300,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: ImpactEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 393231845406526797, guid: 5da10d97be3e281478a9110538d344f7,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.17515129
+      objectReference: {fileID: 0}
+    - target: {fileID: 393231845406526797, guid: 5da10d97be3e281478a9110538d344f7,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.9056604
+      objectReference: {fileID: 0}
+    - target: {fileID: 393231845406526797, guid: 5da10d97be3e281478a9110538d344f7,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.82035166
+      objectReference: {fileID: 0}
     - target: {fileID: 289513277674353363, guid: 5da10d97be3e281478a9110538d344f7,
         type: 3}
       propertyPath: m_LocalPosition.x
