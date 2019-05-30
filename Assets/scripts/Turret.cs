@@ -30,7 +30,8 @@ public class Turret : MonoBehaviour {
 
     [HideInInspector]
     public Bullet bullet;
-
+    public Vector3 gridPosition;
+    public LineRenderer rangeIndicator;
     // Use this for initialization
     protected void Start() {
         towerGUI = new UnitTowerGUI(this, World.Instance.towerDetails);
@@ -98,8 +99,12 @@ public class Turret : MonoBehaviour {
             PlayerStats.Money += turretBlueprint.GetSellAmount();
         towerGUI.DeactivateUI();
         World.Instance.GetComponent<UnitGUI>().currentUI = null;
-
+        World.Instance.grid.UnOcupyPosition((int)gridPosition.x, (int)gridPosition.z);
         DestroyImmediate(this.gameObject);
+    }
+
+    public void OccupyPosition(Vector3 vector) {
+        gridPosition = new Vector3(vector.x, vector.y, vector.z);
     }
 
 
@@ -112,12 +117,12 @@ public class Turret : MonoBehaviour {
 
     void CreateRangeIndicator() {
         var segments = 360;
-        var line = GetComponent<LineRenderer>();
-        line.useWorldSpace = false;
-        line.material = rangeIndicatorM;
-        line.startWidth = 0.5f;
-        line.endWidth = 0.5f;
-        line.positionCount = (segments + 1);
+        rangeIndicator = GetComponent<LineRenderer>();
+        rangeIndicator.useWorldSpace = false;
+        rangeIndicator.material = rangeIndicatorM;
+        rangeIndicator.startWidth = 0.5f;
+        rangeIndicator.endWidth = 0.5f;
+        rangeIndicator.positionCount = (segments + 1);
 
         var pointCount = segments + 1; // add extra point to make startpoint and endpoint the same to close the circle
         var points = new Vector3[pointCount];
@@ -125,7 +130,7 @@ public class Turret : MonoBehaviour {
         float theta_scale = 0.01f;
         for (int i = 0; i < pointCount; i++) {
             theta += (2.0f * Mathf.PI * theta_scale);
-            line.SetPosition(i, new Vector3(Mathf.Sin(theta) * range, 0.5f, Mathf.Cos(theta) * range));
+            rangeIndicator.SetPosition(i, new Vector3(Mathf.Sin(theta) * range, 0.5f, Mathf.Cos(theta) * range));
         }
 
     }
@@ -133,5 +138,6 @@ public class Turret : MonoBehaviour {
     public void activateUI() {
         World.Instance.GetComponent<UnitGUI>().currentUI = towerGUI;
         towerGUI.ActivateUI();
+        rangeIndicator.enabled = true;
     }
 }

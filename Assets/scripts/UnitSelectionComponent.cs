@@ -19,7 +19,7 @@ public class UnitSelectionComponent : MonoBehaviour {
     }
     private void DisableSelection(SelectableUnitComponent selectableObject) {
         if(!MouseInputUIBlocker.BlockedByUI) { 
-            Destroy(selectableObject.selectionCircle.gameObject);
+            //Destroy(selectableObject.selectionCircle.gameObject);
             selectableObject.selectionCircle = null;
             LineRenderer lr = selectableObject.gameObject.GetComponent<LineRenderer>();
             if (lr != null)
@@ -37,13 +37,13 @@ public class UnitSelectionComponent : MonoBehaviour {
     }
 
     private void EnableSelection(SelectableUnitComponent selectableObject) {
-        LineRenderer lr = selectableObject.gameObject.GetComponent<LineRenderer>();
+        LineRenderer lr = selectableObject.unitSelection;
         if (lr != null)
             lr.enabled = true;
         selectableObject.unitSelection.enabled = true;
-        Enemy e = selectableObject.GetComponent<Enemy>();
-        Turret t = selectableObject.GetComponent<Turret>();
-        UnitGUI a = World.Instance.GetComponent<UnitGUI>();
+        Enemy e = selectableObject.enemy;
+        Turret t = selectableObject.turret;
+        UnitGUI a = World.Instance.unitGUI;
         if (a.currentUI != null) {
             a.currentUI.DeactivateUI();
         }
@@ -73,12 +73,12 @@ public class UnitSelectionComponent : MonoBehaviour {
             Boolean b = false;
             foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
                 if (IsWithinBounds(selectableObject.gameObject) && !b) {
-                    selectableObject.selectionCircle = Instantiate(selectionCirclePrefab);
+                    //selectableObject.unitSelection.enabled = true;//Instantiate(selectionCirclePrefab);
                     EnableSelection(selectableObject);
                     b = true;
                 }
                 else {
-                    if (selectableObject.selectionCircle != null) {
+                    if (selectableObject.unitSelection.enabled) {
                         DisableSelection(selectableObject);
                     }
                 }
@@ -89,12 +89,12 @@ public class UnitSelectionComponent : MonoBehaviour {
         if (isSelecting) {
             foreach (var selectableObject in FindObjectsOfType<SelectableUnitComponent>()) {
                 if (IsWithinSelectionBounds(selectableObject.gameObject)) {
-                    if (selectableObject.selectionCircle == null) {
-                        selectableObject.selectionCircle = Instantiate(selectionCirclePrefab);
+                    if (!selectableObject.unitSelection.enabled) {
+                        //selectableObject.selectionCircle = Instantiate(selectionCirclePrefab);
                         EnableSelection(selectableObject);
                     }
                 }
-                else if (selectableObject.selectionCircle != null ) {
+                else if (selectableObject.unitSelection.enabled) {
                         DisableSelection(selectableObject);
                 }
             }

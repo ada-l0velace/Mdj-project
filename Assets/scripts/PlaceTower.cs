@@ -25,14 +25,12 @@ public class PlaceTower : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         currentPos = new Vector3(0,0,0);
-        //button.onClick.AddListener(this.clicked);
         int j = 0;
         foreach (TowerButton item in towerPrefabs) {
             
             GameObject newSlot = Instantiate<GameObject>(slot, panel.transform);
             newSlot.name = j.ToString();
             Image[] images = newSlot.GetComponentsInChildren<Image>();
-            //Button button = newSlot.GetComponentInChildren<Button>();
             
             foreach (Image img in images) {
                 if (img.gameObject.name == "icon") { 
@@ -81,7 +79,7 @@ public class PlaceTower : MonoBehaviour {
                     Vector3 n = new Vector3(x, y, z);
                     currTower.transform.position = n;
                     turret.isBuilding = false;
-                    turret.GetComponent<LineRenderer>().enabled = false;
+                    turret.rangeIndicator.enabled = false;
 
                     turret.GetComponent<SelectableUnitComponent>().unitSelection.enabled = false;
                     currTower = null;
@@ -91,6 +89,7 @@ public class PlaceTower : MonoBehaviour {
                     }
 
                     grid.OcupyPosition((int)x, (int)z);
+                    turret.OccupyPosition(n);
                     PlayerStats.Money -= turret.turretBlueprint.cost;
                     
                 }

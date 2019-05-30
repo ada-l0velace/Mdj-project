@@ -11,7 +11,6 @@ public class LaserBeam : Turret {
     public int damageOverTime = 30;
     public float slowAmount = .5f;
     public Material laserMaterial;
-    bool slowing =false;
     float modifier = 0.5f;
     protected new void Start() {
         base.Start();
@@ -77,14 +76,14 @@ public class LaserBeam : Turret {
         impactEffect.transform.position = target.position + direction.normalized;
         impactEffect.transform.rotation = Quaternion.LookRotation(direction);
 
-        Rigidbody rb = targetEnemy.GetComponent<Rigidbody>();
+        /*Rigidbody rb = targetEnemy.GetComponent<Rigidbody>();
         float disturb = 80f;
 
         Vector3 vec = new Vector3(Random.value - .5f, Random.value - .5f, Random.value - .5f);
         rb.AddForce(vec * disturb);
 
         Vector3 vec2 = new Vector3(Random.value - .5f, Random.value - .5f, Random.value - .5f);
-        rb.AddTorque(vec2 * 30);
+        rb.AddTorque(vec2 * 30);*/
 
 
     }

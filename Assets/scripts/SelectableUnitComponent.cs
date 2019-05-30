@@ -8,11 +8,15 @@ using System.Collections.Generic;
 public class SelectableUnitComponent : MonoBehaviour {
     public GameObject selectionCircle;
     public LineRenderer unitSelection;
+    public Enemy enemy;
+    public Turret turret;
 
     void Start() {
         SelectionPoints();
         unitSelection.enabled = false;
-        
+        enemy = GetComponent<Enemy>();
+        turret = GetComponent<Turret>();
+
     }
     private void Update() {
         unitSelection.transform.position = transform.position + (Vector3.up * 0.1f);

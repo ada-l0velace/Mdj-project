@@ -24,6 +24,7 @@ public class World : MonoBehaviour {
     public GameObject towerDetails;
     public GameObject canvas;
     public Slider healthBar;
+    public UnitGUI unitGUI;
 
     int[,] map = new int[,]  {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                                 {1,2,1,0,0,0,0,0,0,0,0,1,1,3,1,1},
@@ -147,6 +148,7 @@ public class World : MonoBehaviour {
 
         //StaticEditorFlags.OffMeshLinkGeneration = true;
         meshSurface.BuildNavMesh();
+        unitGUI = World.Instance.GetComponent<UnitGUI>();
 
     }
 
