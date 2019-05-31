@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour {
     [HideInInspector]
     public IGUI enemyGUI;
     public NavMeshAgent m_Agent;
+    public NavMeshObstacle m_Obstacle;
     private PIDRigidbody pid;
     public float startHealth = 400;
     public float health;
@@ -24,23 +25,32 @@ public class Enemy : MonoBehaviour {
     public Slider healthBar;
     private bool isDead = false;
     public bool isSlowed = false;
-
+    private NavMeshPath path;
     public void Start() {
         this.enabled = true;
         FloatingTextController.Initialize();
         if (m_Agent == null) {
             m_Agent = gameObject.AddComponent<NavMeshAgent>();
+            m_Agent.stoppingDistance = 1f;
+            m_Agent.enabled = false;
         }
+
+        m_Obstacle = gameObject.AddComponent<NavMeshObstacle>();
+        m_Obstacle.enabled = false;
         startSpeed = m_Agent.speed;
         health = startHealth;
         gameObject.tag = "Enemy";
         SelectableUnitComponent suc = gameObject.AddComponent<SelectableUnitComponent>();
+        //gameObject.AddComponent<NavMeshObstacle>();
         unitSelection = suc.unitSelection;
         endPosition = World.Instance.endPosition;
         canvas = World.Instance.canvas;
         enemyGUI = new UnitEnemyGUI(this, World.Instance.selectedDetails);
         healthBar = Instantiate(World.Instance.healthBar, Camera.main.WorldToScreenPoint((Vector3.up * 0.1f) + transform.position), Quaternion.identity, canvas.transform);
         moving = false;
+        m_Agent.enabled = true;
+        path = new NavMeshPath();
+
     }
 
     private void Update() {
@@ -64,6 +74,27 @@ public class Enemy : MonoBehaviour {
             moving = true;
         }
         if (moving) {
+            /*GameObject[] gos = GameObject.FindGameObjectsWithTag("Enemy");
+
+            foreach (GameObject e in gos) {
+                Enemy o = e.GetComponent<Enemy>();
+                if (o.GetHashCode() == this.GetHashCode())
+                    continue;
+
+                if ((transform.position - e.transform.position).sqrMagnitude < Mathf.Pow(m_Agent.stoppingDistance, 2) && o.moving) {
+                    m_Agent.enabled = false;
+                    m_Obstacle.enabled = true;
+                    break;
+                }
+                else {
+                    m_Obstacle.enabled = false;
+                    m_Agent.enabled = true;
+                    m_Agent.destination = endPosition.transform.position;
+                }
+            }*/
+            //NavMesh.CalculatePath(transform.position, endPosition.transform.position, NavMesh.AllAreas, path);
+            //for (int i = 0; i < path.corners.Length - 1; i++)
+            //    Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
             Vector3 desiredVelocity = m_Agent.desiredVelocity;
             Vector3 desiredOrientation = Quaternion.LookRotation(desiredVelocity, Vector3.up).eulerAngles;
             pid.Update(GetComponent<Rigidbody>(), desiredVelocity, desiredOrientation, Time.deltaTime);
@@ -72,6 +103,7 @@ public class Enemy : MonoBehaviour {
             if (!isSlowed)
                 m_Agent.speed = startSpeed;
             isSlowed = false;
+            //m_Agent.enabled = false;
         }
         //Debug.Log(Vector3.Distance(transform.position, endPosition.transform.position));
         if (Vector3.Distance(transform.position, endPosition.transform.position) <= 2.5f) {
