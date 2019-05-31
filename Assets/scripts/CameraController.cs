@@ -42,8 +42,8 @@ public class CameraController : MonoBehaviour {
         float factor = Mathf.Pow(.99f, 1000*Time.deltaTime);
         Vector3 pos = transform.position;
 
-        Vector3 forwardMovement = player.transform.forward * Input.GetAxis("Vertical") * panSpeed * Time.deltaTime;
-        Vector3 rightMovement = player.transform.right * Input.GetAxis("Horizontal") * panSpeed * Time.deltaTime;
+        Vector3 forwardMovement = player.transform.forward * Input.GetAxis("Vertical") * panSpeed;
+        Vector3 rightMovement = player.transform.right * Input.GetAxis("Horizontal") * panSpeed ;
         Vector3 finalMovement = forwardMovement + rightMovement;
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
@@ -51,8 +51,8 @@ public class CameraController : MonoBehaviour {
         velocityZoom *= Mathf.Pow(.99f, 1000 * Time.deltaTime);
 
         
-        pos.x += finalMovement.x;
-        pos.z += finalMovement.z;
+        pos.x += finalMovement.x * Time.deltaTime;
+        pos.z += finalMovement.z * Time.deltaTime;
         pos.y -= 100f * velocityZoom * Time.deltaTime;
 
         velocityX *= factor;
