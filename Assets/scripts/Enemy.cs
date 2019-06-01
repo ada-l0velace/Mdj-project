@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour {
     private bool isDead = false;
     public bool isSlowed = false;
     private NavMeshPath path;
+    Rigidbody rb;
     public void Start() {
         this.enabled = true;
         FloatingTextController.Initialize();
@@ -34,7 +35,7 @@ public class Enemy : MonoBehaviour {
             m_Agent.stoppingDistance = 1f;
             m_Agent.enabled = false;
         }
-
+        rb = GetComponent<Rigidbody>();
         m_Obstacle = gameObject.AddComponent<NavMeshObstacle>();
         m_Obstacle.enabled = false;
         startSpeed = m_Agent.speed;
@@ -96,9 +97,11 @@ public class Enemy : MonoBehaviour {
             //for (int i = 0; i < path.corners.Length - 1; i++)
             //    Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
             Vector3 desiredVelocity = m_Agent.desiredVelocity;
-            Vector3 desiredOrientation = Quaternion.LookRotation(desiredVelocity, Vector3.up).eulerAngles;
-            pid.Update(GetComponent<Rigidbody>(), desiredVelocity, desiredOrientation, Time.deltaTime);
-            Rigidbody rb = GetComponent<Rigidbody>();
+            if(desiredVelocity != Vector3.zero) { 
+                Vector3 desiredOrientation = Quaternion.LookRotation(desiredVelocity, Vector3.up).eulerAngles;
+                pid.Update(rb, desiredVelocity, desiredOrientation, Time.deltaTime);
+            }
+            
             m_Agent.nextPosition = transform.position;
             if (!isSlowed)
                 m_Agent.speed = startSpeed;

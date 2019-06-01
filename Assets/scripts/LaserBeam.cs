@@ -16,9 +16,11 @@ public class LaserBeam : Turret {
         base.Start();
         CreateLaserBeam();
         impactEffect.Stop();
-        if (impactLight)
+        if (!impactLight) {
+            impactLight = impactEffect.GetComponentInChildren<Light>();
             impactLight.enabled = false;
-
+        }
+        laserRenderer.enabled = false;
     }
 
     protected new void Update() {
@@ -63,19 +65,20 @@ public class LaserBeam : Turret {
         AttackEnemy(targetEnemy);
         
         if (!laserRenderer.enabled) {
+            
             laserRenderer.enabled = true;
             impactEffect.Play();
             impactLight.enabled = true;
         }
-        laserRenderer.SetPosition(0, firePoint.position);
-        if (target == null)
+        /*if (target == null) {
             return;
+        }*/
+        laserRenderer.SetPosition(0, firePoint.position);
         laserRenderer.SetPosition(1, target.position);
         Vector3 direction = firePoint.position - target.position;
 
         impactEffect.transform.position = target.position + direction.normalized;
         impactEffect.transform.rotation = Quaternion.LookRotation(direction);
-
         /*Rigidbody rb = targetEnemy.GetComponent<Rigidbody>();
         float disturb = 80f;
 
