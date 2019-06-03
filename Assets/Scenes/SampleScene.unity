@@ -1525,7 +1525,7 @@ MonoBehaviour:
   slot: {fileID: 8193233203539700748, guid: e7253e9a015d968439ac518b07e58471, type: 3}
   panel: {fileID: 933261069}
   towerPrefabs:
-  - prefab: {fileID: 6255687462748355189, guid: e324bdc9e84d5204ab9292f940ad3cac,
+  - prefab: {fileID: 1410027690205684462, guid: e324bdc9e84d5204ab9292f940ad3cac,
       type: 3}
     image: {fileID: 21300000, guid: 7617a486f29482a46a010e515d70acac, type: 3}
   - prefab: {fileID: 577861150360806596, guid: 471c7e4beece37c45b0c35b39dc2ea18, type: 3}
