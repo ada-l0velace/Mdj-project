@@ -104,6 +104,25 @@ public class Turret : MonoBehaviour {
         DestroyImmediate(this.gameObject);
     }
 
+    public void UpgradeTurret() {
+        if (!turretBlueprint.upgradedPrefab || PlayerStats.Money < turretBlueprint.upgradeCost) {
+            Debug.Log("Not enough money to upgrade that!");
+            return;
+        }
+
+        PlayerStats.Money -= turretBlueprint.upgradeCost;
+
+        //Get rid of the old turret
+        Destroy(gameObject);
+
+        //Build a new one
+        Turret tower = Instantiate(turretBlueprint.upgradedPrefab, transform.position, Quaternion.identity).GetComponent<Turret>();
+        tower.gameObject.AddComponent<SelectableUnitComponent>();
+        tower.isBuilding = false;
+        tower.rangeIndicator.enabled = false;
+        tower.GetComponent<SelectableUnitComponent>().unitSelection.enabled = false;
+    }
+
     public void OccupyPosition(Vector3 vector) {
         gridPosition = new Vector3(vector.x, vector.y, vector.z);
     }

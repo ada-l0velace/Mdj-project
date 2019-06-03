@@ -30,7 +30,7 @@ public class LaserBeam : Turret {
                 if (laserRenderer.enabled) {
                     laserRenderer.enabled = false;
                     impactEffect.Stop();
-                    impactLight.enabled = false;
+                    //impactLight.enabled = false;
                 }
                 return;
             }
@@ -55,7 +55,7 @@ public class LaserBeam : Turret {
 
         if (e != null) {
             //ImpactEnemyPhysics(e);
-            e.TakeDamage(damageT * Time.deltaTime);
+            e.TakeDamage(Mathf.Round(damageT * Time.deltaTime), false);
             e.Slow(slowAmount);
         }
     }
@@ -67,10 +67,12 @@ public class LaserBeam : Turret {
             
             laserRenderer.enabled = true;
             impactEffect.Play();
-            impactLight.enabled = true;
+            //impactLight.enabled = true;
         }
 
         laserRenderer.SetPosition(0, firePoint.position);
+        if (target == null)
+            return;
         laserRenderer.SetPosition(1, target.position);
         Vector3 direction = firePoint.position - target.position;
 

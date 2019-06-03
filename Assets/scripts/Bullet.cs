@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour {
     protected virtual void Damage(Transform enemy) {
         Enemy e = enemy.GetComponent<Enemy>();
         if (e != null) {
-            e.TakeDamage(damage);
+            e.TakeDamage(damage, true);
         }
     }
 
@@ -69,7 +69,7 @@ public class Bullet : MonoBehaviour {
             Vector3 force = transform.TransformDirection(new Vector3(0, 0, 1));
             force = new Vector3(force.x, .2f, force.z).normalized;
 
-            force *= 10f;
+            force *= 5f;
             rb.AddForceAtPosition(force, transform.position, ForceMode.Impulse);
 
             float disturb = 2;

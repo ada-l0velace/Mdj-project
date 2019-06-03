@@ -23,7 +23,7 @@ public class FireBullet : Bullet {
 
         if (e != null) {
             ImpactEnemyPhysics(e);
-            e.TakeDamage(damageT);
+            e.TakeDamage(damageT, true);
         }
     }
     protected override void Explode() {

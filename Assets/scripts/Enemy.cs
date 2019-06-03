@@ -7,23 +7,33 @@ public class Enemy : MonoBehaviour {
 
     public float startSpeed = 10f;
     public ElementType eType;
+    public bool isBoss;
+    [HideInInspector]
     public Transform endPosition;
+    [HideInInspector]
     public GameObject canvas;
+    [HideInInspector]
     public bool moving;
 
     [HideInInspector]
     public IGUI enemyGUI;
+    [HideInInspector]
     public NavMeshAgent m_Agent;
+    [HideInInspector]
     public NavMeshObstacle m_Obstacle;
     private PIDRigidbody pid;
     public float startHealth = 400;
+    [HideInInspector]
     public float health;
+    [HideInInspector]
     public LineRenderer unitSelection;
     public int worth = 50;
     public GameObject deathEffect;
     [Header("Unity Stuff")]
+    [HideInInspector]
     public Slider healthBar;
     private bool isDead = false;
+    [HideInInspector]
     public bool isSlowed = false;
     private NavMeshPath path;
     Rigidbody rb;
@@ -60,18 +70,19 @@ public class Enemy : MonoBehaviour {
                 m_Agent = gameObject.AddComponent<NavMeshAgent>();
             }
             m_Agent.destination = endPosition.transform.position;
-            m_Agent.updatePosition = false;
-            m_Agent.updateRotation = false;
-            m_Agent.updateUpAxis = false;
-            m_Agent.autoRepath = true;
+            if(rb) { 
+                m_Agent.updatePosition = false;
+                m_Agent.updateRotation = false;
+                m_Agent.updateUpAxis = false;
+                m_Agent.autoRepath = true;
 
-            pid = new PIDRigidbody(
-                new Vector3(1000, 0, 0),
-                new Vector3(0, 0, 0),
-                new Vector3(1000, 0, 1000),
-                new Vector3(0, 0, 0)
-                );
-
+                pid = new PIDRigidbody(
+                    new Vector3(1000, 0, 0),
+                    new Vector3(0, 0, 0),
+                    new Vector3(1000, 0, 1000),
+                    new Vector3(0, 0, 0)
+                    );
+            }
             moving = true;
         }
         if (moving) {
@@ -97,12 +108,14 @@ public class Enemy : MonoBehaviour {
             //for (int i = 0; i < path.corners.Length - 1; i++)
             //    Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
             Vector3 desiredVelocity = m_Agent.desiredVelocity;
-            if(desiredVelocity != Vector3.zero) { 
+            if(desiredVelocity != Vector3.zero && rb) { 
                 Vector3 desiredOrientation = Quaternion.LookRotation(desiredVelocity, Vector3.up).eulerAngles;
                 pid.Update(rb, desiredVelocity, desiredOrientation, Time.deltaTime);
+                m_Agent.nextPosition = transform.position;
+                m_Agent.destination = endPosition.transform.position;
             }
             
-            m_Agent.nextPosition = transform.position;
+            
             if (!isSlowed)
                 m_Agent.speed = startSpeed;
             isSlowed = false;
@@ -114,7 +127,11 @@ public class Enemy : MonoBehaviour {
             Die();
             PlayerStats.Money = saved;
             //GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
-            PlayerStats.Lives--;
+            if(!isBoss)
+                PlayerStats.Lives--;
+            else {
+                PlayerStats.Lives -= 2;
+            }
             //UnitSpawner.EnemiesAlive--;
             //Destroy(effect, 5f);
             //DestroyImmediate(healthBar.gameObject);
@@ -134,7 +151,7 @@ public class Enemy : MonoBehaviour {
 
     public void TakeDamage(float amount) {
         //Debug.Log(health + " | " + amount + " | " + healthBar.value);
-        FloatingTextController.CreateFloatingText(amount.ToString(), transform);
+        
         health -= amount;
         healthBar.value = health / startHealth;
         healthBar.transform.SetAsFirstSibling();
@@ -145,6 +162,12 @@ public class Enemy : MonoBehaviour {
         if (health <= 0 && !isDead) {
             Die();
         }
+    }
+
+    public void TakeDamage(float amount, bool showDamage) {
+        if(showDamage)
+            FloatingTextController.CreateFloatingText(amount.ToString(), transform);
+        TakeDamage(amount);
     }
 
     public void Slow(float pct) {

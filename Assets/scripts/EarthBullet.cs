@@ -21,7 +21,7 @@ public class EarthBullet : Bullet {
 
         if (e != null) {
             ImpactEnemyPhysics(e);
-            e.TakeDamage(damageT);
+            e.TakeDamage(damageT,true);
         }
     }
 }

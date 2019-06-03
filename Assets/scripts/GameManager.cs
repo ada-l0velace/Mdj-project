@@ -17,8 +17,11 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		if (GameIsOver)
 			return;
-
-		if (PlayerStats.Lives <= 0) {
+        if (Input.GetKeyUp(KeyCode.KeypadPlus) && Time.timeScale <= 3)
+            Time.timeScale++;
+        else if (Input.GetKeyUp(KeyCode.KeypadMinus) && Time.timeScale > 0)
+            Time.timeScale--;
+        if (PlayerStats.Lives <= 0) {
 			EndGame();
 		}
 	}

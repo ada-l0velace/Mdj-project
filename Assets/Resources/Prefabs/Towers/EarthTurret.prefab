@@ -215,7 +215,7 @@ MonoBehaviour:
   rangeIndicatorM: {fileID: 2100000, guid: ce8ccfcaf584cd44a99e601e7dfe1c62, type: 2}
   bulletPrefab: {fileID: 5630621071608864672, guid: 7f144bdc02117754fa114f072838b4bc,
     type: 3}
-  fireRate: 1
+  fireRate: 2
   enemyTag: Enemy
   partToRotate: {fileID: 8663785437677186903}
   turnSpeed: 10

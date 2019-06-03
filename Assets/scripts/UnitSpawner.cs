@@ -23,6 +23,7 @@ public class UnitSpawner : MonoBehaviour
     private int waveIndex = 0;
 
     void Update() {
+
         if (EnemiesAlive > 0) {
             return;
         }

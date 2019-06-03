@@ -20,7 +20,7 @@ public class WaterBullet : Bullet {
 
         if (e != null) {
             ImpactEnemyPhysics(e);
-            e.TakeDamage(damageT);
+            e.TakeDamage(damageT, true);
         }
     }
 }

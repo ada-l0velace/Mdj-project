@@ -1562,6 +1562,12 @@ MonoBehaviour:
   - enemy: {fileID: 9079891180741884839, guid: 06bfa18166c112143b16547f036b9738, type: 3}
     count: 40
     rate: 1.5
+  - enemy: {fileID: 4861199452008596040, guid: 5666371bb2cc2e74594ce5d997fc24a9, type: 3}
+    count: 5
+    rate: 1.5
+  - enemy: {fileID: 5410129161299635944, guid: 089bf7e3eadadab458fe8b520dc01603, type: 3}
+    count: 5
+    rate: 1.5
   spawnPoint: {fileID: 1755412496}
   timeBetweenWaves: 15
   gameManager: {fileID: 1226617248}
@@ -1637,7 +1643,7 @@ MonoBehaviour:
   - tag: Damage
     prefab: {fileID: 5794070940489587924, guid: 34c65d7031c347e40909fb3a589d6d43,
       type: 3}
-    size: 10
+    size: 50
 --- !u!1 &1345782906
 GameObject:
   m_ObjectHideFlags: 0

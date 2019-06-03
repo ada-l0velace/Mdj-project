@@ -16,11 +16,8 @@ public class FloatingTextController : MonoBehaviour {
             popupText = Resources.Load<FloatingText>("Prefabs/UI/PopupTextParent");
     }
     public static void CreateFloatingText(string text, Transform location) {
-        /*FloatingText instance =*/ ObjectPooler.Instance.SpawnFromPool("Damage").onObjectSpawn(location,text,canvas); //Instantiate(popupText);
-        //Vector2 screenPosition = Camera.main.WorldToScreenPoint(location.position);
-        //instance.transform.SetParent(canvas.transform, false);
-        //instance.transform.position = screenPosition;
-        //instance.setText(text);
+       ObjectPooler.Instance.SpawnFromPool("Damage").onObjectSpawn(location,text,canvas);
+
     }
    
 }

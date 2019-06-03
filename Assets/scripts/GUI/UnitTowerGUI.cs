@@ -30,7 +30,9 @@ public class UnitTowerGUI : IGUI {
         if(tower.image)
             image.texture = tower.image;
         sellButton.onClick.RemoveAllListeners();
+        upgradeButton.onClick.RemoveAllListeners();
         sellButton.onClick.AddListener(tower.SellTurret);
+        upgradeButton.onClick.AddListener(tower.UpgradeTurret);
         current.transform.SetAsLastSibling();
     }
 
