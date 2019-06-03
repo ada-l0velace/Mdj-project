@@ -105,11 +105,15 @@ public class Turret : MonoBehaviour {
     }
 
     public void UpgradeTurret() {
-        if (!turretBlueprint.upgradedPrefab || PlayerStats.Money < turretBlueprint.upgradeCost) {
-            Debug.Log("Not enough money to upgrade that!");
+        if (!turretBlueprint.upgradedPrefab) {
+            Debug.Log("No More Upgrades!");
             return;
         }
 
+        if (PlayerStats.Money < turretBlueprint.upgradeCost) {
+            Debug.Log("Not enough money to upgrade that!");
+            return;
+        }
         PlayerStats.Money -= turretBlueprint.upgradeCost;
 
         //Get rid of the old turret
