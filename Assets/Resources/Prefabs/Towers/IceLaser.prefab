@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed0afee2b200f15408623a31aef9d49e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 2800000, guid: 2aec63713d8a41a4fa95a8de77d527fe, type: 3}
   eType: 3
   turretName: 
   turretBlueprint:
@@ -301,6 +302,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ImpactEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 483526461218123607, guid: 5da10d97be3e281478a9110538d344f7,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 483526461218123607, guid: 5da10d97be3e281478a9110538d344f7,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 289513277674353363, guid: 5da10d97be3e281478a9110538d344f7,
         type: 3}

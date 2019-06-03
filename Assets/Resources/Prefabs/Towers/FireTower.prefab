@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 6255687462738954667}
   - component: {fileID: 8319782098753849804}
   m_Layer: 0
-  m_Name: Tower_Fire_2
+  m_Name: FireTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -520,6 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd203dd4749194b45b07fb894d54c4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 2800000, guid: 6510000f850f8db46bea5dff52bb2a8f, type: 3}
   eType: 1
   turretName: 
   turretBlueprint:
@@ -538,6 +539,8 @@ MonoBehaviour:
   turnSpeed: 10
   firePoint: {fileID: 6255687462324644986}
   bullet: {fileID: 0}
+  gridPosition: {x: 0, y: 0, z: 0}
+  rangeIndicator: {fileID: 0}
 --- !u!1 &6255687462748355191
 GameObject:
   m_ObjectHideFlags: 0

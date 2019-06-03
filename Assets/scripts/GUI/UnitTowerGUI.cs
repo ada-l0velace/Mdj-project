@@ -8,6 +8,7 @@ public class UnitTowerGUI : IGUI {
     GameObject current;
     Button sellButton;
     Button upgradeButton;
+    RawImage image;
 
     Text[] texts;
 
@@ -17,7 +18,7 @@ public class UnitTowerGUI : IGUI {
         sellButton = current.GetComponentsInChildren<Button>()[1];
         upgradeButton = current.GetComponentsInChildren<Button>()[0];
         texts = current.GetComponentsInChildren<Text>();
-
+        image = current.GetComponentInChildren<RawImage>();
         //current.GetComponentsInChildren<Button>()[1].onClick.AddListener(tower.SellTurret);
     }
 
@@ -26,6 +27,8 @@ public class UnitTowerGUI : IGUI {
             return;
         }
         tower.UpdateStats(texts);
+        if(tower.image)
+            image.texture = tower.image;
         sellButton.onClick.RemoveAllListeners();
         sellButton.onClick.AddListener(tower.SellTurret);
         current.transform.SetAsLastSibling();

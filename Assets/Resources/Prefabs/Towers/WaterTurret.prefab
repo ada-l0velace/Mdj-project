@@ -202,6 +202,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd203dd4749194b45b07fb894d54c4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 2800000, guid: a6fe711fe566d064faa0e2a91d78d02f, type: 3}
+  eType: 0
+  turretName: 
   turretBlueprint:
     prefab: {fileID: 8663785437465044930}
     cost: 100
@@ -213,12 +216,13 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3653974463214921031, guid: 112b9bc7fbe744043b456b4018631c02,
     type: 3}
   fireRate: 1
-  impactEffect: {fileID: 7273781483575291380, guid: faec30d4123f3ea448f5e469a5d15b24,
-    type: 3}
   enemyTag: Enemy
   partToRotate: {fileID: 8663785437677186903}
   turnSpeed: 10
   firePoint: {fileID: 8663785437694687741}
+  bullet: {fileID: 0}
+  gridPosition: {x: 0, y: 0, z: 0}
+  rangeIndicator: {fileID: 0}
 --- !u!1 &8663785437677186902
 GameObject:
   m_ObjectHideFlags: 0

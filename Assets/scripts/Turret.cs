@@ -9,6 +9,7 @@ public class Turret : MonoBehaviour {
     protected Enemy targetEnemy;
 
     [Header("General")]
+    public Texture2D image;
     public Enemy.ElementType eType;
     public string turretName;
     public IGUI towerGUI;

@@ -61,7 +61,6 @@ public class LaserBeam : Turret {
     }
 
     void Laser() {
-        //targetEnemy.TakeDamage(damageOverTime * Time.deltaTime);
         AttackEnemy(targetEnemy);
         
         if (!laserRenderer.enabled) {
@@ -70,9 +69,7 @@ public class LaserBeam : Turret {
             impactEffect.Play();
             impactLight.enabled = true;
         }
-        /*if (target == null) {
-            return;
-        }*/
+
         laserRenderer.SetPosition(0, firePoint.position);
         laserRenderer.SetPosition(1, target.position);
         Vector3 direction = firePoint.position - target.position;
